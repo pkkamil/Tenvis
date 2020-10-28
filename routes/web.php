@@ -22,9 +22,7 @@ Route::get('/login', function () {
 });
 
 Route::get('/author/{authorId}', 'UsersController@index');
-
 Route::get('/blog', 'PostsController@index');
-
 Route::get('/blog/post/{id}', 'PostsController@find');
 
 // Route::get('/blog/post/{id}', function ($id) {
@@ -32,3 +30,6 @@ Route::get('/blog/post/{id}', 'PostsController@find');
 // });
 
 
+Auth::routes();
+
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');

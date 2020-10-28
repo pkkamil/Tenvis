@@ -1,15 +1,27 @@
-<section class="loginbox">
+<section class="loginbox @if ($errors->all()) error-box @endif">
     <div class="avatar">
-        <i class="fas fa-user"></i>
+        <i class="fa fa-user"></i>
     </div>
     <h1>Login</h1>
-    <form action="login.php">
-        <p>Email:</p>
-        <input type="email" name="" placeholder="Enter your email" value="">
-        <p>Password:</p>
-        <input type="password" name="" placeholder="Enter your password" value="">
-        <input type="submit" name="" value="Log in">
-        <a href="forgotten.html">Forgot your password?</a><br>
-        <a href="/signup.html">You are new?</a>
+    @if ($errors->all())
+        <ul class="errors">
+            @foreach($errors->all() as $error)
+            <li> {{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
+    <form method="POST" action="{{ route('login') }}">
+        @csrf
+        <label for="email">{{ __('Email:') }}</label>
+        <input id="email" type="email" @error('email') class="error-input" is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Enter your email">
+        <label for="password">{{ __('Password:') }}</label>
+        <input id="password" type="password" @error('password') class="error-input" is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Enter your password">
+        <button type="submit" name="">{{ __('Login') }}</button>
+        @if (Route::has('password.request'))
+        <a class="forgot" href="{{ route('password.request') }}">
+            {{ __('Forgot Your Password?') }}
+        </a>
+        @endif
+    <a href="{{ route('register') }}">You are new?</a>
     </form>
 </section>
