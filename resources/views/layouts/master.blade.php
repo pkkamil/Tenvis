@@ -27,7 +27,7 @@
     <link rel="apple-touch-icon" sizes="192x192" href={{ asset("resources/img/favicon.png") }} />
     <link rel="apple-touch-startup-image" href={{ asset("resources/img/favicon.png") }} />
     <!-- Bootstrap -->
-    {{-- <link rel="stylesheet" type="text/css" href={{ asset("resources/css/bootstrap.min.css")}} /> --}}
+    <link rel="stylesheet" type="text/css" href={{ asset("resources/css/bootstrap.min.css")}} />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/95a2d2c3f2.js" crossorigin="anonymous"></script>

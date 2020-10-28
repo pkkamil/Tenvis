@@ -30,6 +30,6 @@ Route::get('/blog/post/{id}', 'PostsController@find');
 // });
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('verified');

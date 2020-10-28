@@ -1,6 +1,6 @@
 <nav>
     <div class="menu-icon">
-        <i class="fas fa-bars fa-2x"></i>
+        <i class="fa fa-bars fa-2x"></i>
     </div>
     <div class="logo">
         <a href="/">TENVIS</a>
@@ -16,9 +16,14 @@
             </li>
                 <li><a @if ($active == 'blog') class="active" @endif href="/blog">Blog</a></li>
             @Auth
-            <li><a href="/login">Konto</a></li>
+            <li><a href="/dashboard">Konto</a></li>
             @else
-            <li><a href="/login">Login</a></li>
+                @if ($active != 'register')
+                    <li><a @if ($active == 'login') class="active" @endif href="/login">Login</a></li>
+                @endif
+                @if ($active == 'register')
+                    <li><a class="active" href="/register">Sign up</a></li>
+                @endif
             @endauth
         </ul>
     </div>

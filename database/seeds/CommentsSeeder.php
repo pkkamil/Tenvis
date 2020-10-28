@@ -1,9 +1,7 @@
 <?php
 
-namespace Database\Seeders;
-
 use Illuminate\Database\Seeder;
-use App\Models\Comment;
+use App\Comment;
 
 class CommentsSeeder extends Seeder
 {

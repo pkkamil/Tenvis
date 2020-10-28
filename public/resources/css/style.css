@@ -599,25 +599,25 @@ article#post-content {
     padding: 0px 100px;
 }
 
+article.form-container {
+    height: calc(100% + 90px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+}
+
 .loginbox {
+    position: absolute;
     width: 320px;
-    height: 430px;
+    height: auto;
     background: #262626;
     color: #FFF;
-    top: 55%;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    box-sizing: border-box;
-    padding: 70px 30px;
+    padding: 70px 30px 30px 30px;
 }
 
 .loginbox .forgot {
     display: block;
-}
-
-.signup {
-    height: 520px;
 }
 
 .loginbox .avatar {
@@ -714,8 +714,12 @@ input[type="password"]:focus {
     margin-bottom: 20px;
 }
 
-.loginbox.error-box {
-    height: 480px;
+.loginbox section ul.register {
+    list-style-type: disc;
+}
+
+.loginbox section {
+    padding: 0 30px;
 }
 
 
@@ -778,6 +782,14 @@ footer .copyright {
     font-size: 1em;
     padding: 5px;
     color: #999;
+}
+
+footer .copyright,
+footer .title,
+footer .description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media (max-width: 1500px) {
@@ -851,6 +863,7 @@ footer .copyright {
     nav ul {
         max-height: 0px;
         background: #262626;
+        padding-right: 0;
     }
     nav.black ul {
         background: #262626;
@@ -915,9 +928,6 @@ footer .copyright {
     }
     section.author-box {
         top: 55%;
-    }
-    .loginbox {
-        top: 57%;
     }
     article#comments section.writeComment textarea {
         width: 100%;
@@ -986,6 +996,12 @@ footer .copyright {
     section.author-box h4.about_me {
         padding: 0 10px;
     }
+    .loginbox .avatar {
+        display: none;
+    }
+    .loginbox {
+        padding: 30px;
+    }
 }
 
 @media (max-width: 420px) and (orientation: portrait) {
@@ -1035,22 +1051,55 @@ footer .copyright {
     h4 {
         margin: 0;
     }
-    .signup {
-        width: 100%;
-        height: 100%;
-        padding: 30px 30px;
-        height: 460px;
-    }
-    .loginbox .avatar {
-        display: none;
-    }
     .showing {
         border-bottom: 1px solid #999;
+    }
+}
+
+@media (max-width: 350px) {
+    .loginbox {
+        font-size: 15px;
+        padding: 20px;
+        width: 90%;
+    }
+    .loginbox section {
+        padding: 0 20px;
     }
 }
 
 @media (max-width: 290px) {
     section.author-box .avatar {
         margin-top: 44%;
+    }
+}
+
+@media (max-height: 800px) {
+    header.register {
+        height: 120vh;
+    }
+    header.login nav,
+    header.register nav {
+        border-bottom: 1px solid #999;
+    }
+    header.register article.form-container {
+        height: calc(120vh + 90px);
+    }
+}
+
+@media (max-height: 700px) {
+    header.register {
+        height: 130vh;
+    }
+    header.register article.form-container {
+        height: calc(130vh + 90px);
+    }
+}
+
+@media (max-height: 600px) {
+    header.register {
+        height: 150vh;
+    }
+    header.register article.form-container {
+        height: calc(150vh + 90px);
     }
 }
