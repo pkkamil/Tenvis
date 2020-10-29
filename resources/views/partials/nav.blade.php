@@ -16,10 +16,19 @@
             </li>
                 <li><a @if ($active == 'blog') class="active" @endif href="/blog">Blog</a></li>
             @Auth
-            <li><a href="/dashboard">Konto</a></li>
+                @if (Auth::user() -> hasVerifiedEmail())
+                    <li><a href="/dashboard">My Profile</a></li>
+                @else
+                    <li>
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                            @csrf
+                        </form>
+                    </li>
+                @endif
             @else
                 @if ($active != 'register')
-                    <li><a @if ($active == 'login') class="active" @endif href="/login">Login</a></li>
+                    <li><a @if (stristr($active, 'login')) class="active" @endif href="/login">Login</a></li>
                 @endif
                 @if ($active == 'register')
                     <li><a class="active" href="/register">Sign up</a></li>

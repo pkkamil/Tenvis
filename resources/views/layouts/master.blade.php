@@ -51,6 +51,8 @@
 <body>
     @if ($isPost ?? '')
     @include('partials.header-post')
+    @elseif ($auth ?? '' == True)
+    @include('partials.header-auth')
     @else
     @include('partials.header')
     @endif

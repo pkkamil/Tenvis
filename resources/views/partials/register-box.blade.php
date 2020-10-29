@@ -3,7 +3,7 @@
         <div class="avatar">
             <i class="fa fa-user"></i>
         </div>
-        <h1>Sign up</h1>
+        <h1>{{ __('Sign up') }}</h1>
         @if ($errors->all())
         <section>
             <ul class="errors register">
@@ -24,10 +24,10 @@
             <input id="password" type="password" @error('password') class="error-input" is-invalid @enderror"
                 name="password" required autocomplete="current-password" placeholder="Enter your password">
             <label for="password_confirm">{{ __('Confirm password:') }}</label>
-            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm your password">
             <button type="submit" name="">{{ __('Sign up') }}</button>
             @if (Route::has('password.request'))
-            <a class="forgot" href="{{ route('password.request') }}">Forgot your password?</a>
+            <a class="disb" href="{{ route('password.request') }}">Forgot your password?</a>
             @endif
             <a href="{{ route('login') }}">Already have an account?</a>
         </form>

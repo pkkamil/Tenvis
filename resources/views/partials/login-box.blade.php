@@ -3,7 +3,7 @@
         <div class="avatar">
             <i class="fa fa-user"></i>
         </div>
-        <h1>Login</h1>
+        <h1>{{ __('Login') }}</h1>
         @if ($errors->all())
         <ul class="errors">
             @foreach($errors->all() as $error)
@@ -21,7 +21,7 @@
                 name="password" required autocomplete="current-password" placeholder="Enter your password">
             <button type="submit" name="">{{ __('Login') }}</button>
             @if (Route::has('password.request'))
-            <a class="forgot" href="{{ route('password.request') }}">
+            <a class="disb" href="{{ route('password.request') }}">
                 {{ __('Forgot Your Password?') }}
             </a>
             @endif

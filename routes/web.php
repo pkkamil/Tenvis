@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,25 @@ Route::get('/login', function () {
 Route::get('/author/{authorId}', 'UsersController@index');
 Route::get('/blog', 'PostsController@index');
 Route::get('/blog/post/{id}', 'PostsController@find');
+
+// AUTH
+
+Route::get('/dashboard/editor', 'PostsController@createPage')->name('editor');
+Route::get('/dashboard/posts', function() {
+    if (Auth::user()) {
+        if (Auth::user() -> hasVerifiedEmail()) {
+            $posts = Auth::user() -> posts;
+            return view('loggedin.user-posts')->with('posts', $posts);
+        }
+    }
+})->name('user_posts');
+Route::get('/dashboard/account', function() {
+    if (Auth::user()) {
+        if (Auth::user() -> hasVerifiedEmail()) {
+            return view('loggedin.account');
+        }
+    }
+})->name('account');
 
 // Route::get('/blog/post/{id}', function ($id) {
 //     return view('post', compact('id'));

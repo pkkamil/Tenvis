@@ -616,7 +616,7 @@ article.form-container {
     padding: 70px 30px 30px 30px;
 }
 
-.loginbox .forgot {
+.disb {
     display: block;
 }
 
@@ -714,12 +714,58 @@ input[type="password"]:focus {
     margin-bottom: 20px;
 }
 
+span.success {
+    display: block;
+    color: #22ce64;
+    font-size: .9em;
+    margin-bottom: 20px;
+}
+
+section.verify {
+    width: 600px;
+    text-align: center;
+}
+
+section.verify form button {
+    width: 400px;
+    margin-top: 20px;
+}
+
 .loginbox section ul.register {
     list-style-type: disc;
 }
 
 .loginbox section {
     padding: 0 30px;
+}
+
+
+/* AUTH */
+
+article.dashboard-part {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+article.activity-center {
+    background: url("/resources/img/bg-dashboard.jpg") no-repeat 50% 50%;
+    background-size: cover;
+}
+
+article.editor {
+    background: url("/resources/img/bg-editor.jpg") no-repeat 50% 50%;
+    background-size: cover;
+}
+
+article.user-posts {
+    background: url("/resources/img/bg-user_posts.jpg") no-repeat 50% 50%;
+    background-size: cover;
+}
+
+article.account {
+    background: url("/resources/img/bg-account.jpg") no-repeat 50% 50%;
+    background-size: cover;
 }
 
 

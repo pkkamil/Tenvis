@@ -21,4 +21,7 @@ class PostsController extends Controller
 
         return view('post', compact('post', 'comments', 'author'));
     }
+    public function createPage() {
+        return view('loggedin.editor');
+    }
 }
