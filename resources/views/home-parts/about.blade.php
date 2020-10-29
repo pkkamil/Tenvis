@@ -1,5 +1,5 @@
 <article id="about">
-    <h3>ABOUT</h3>
+    <h3 class="title">ABOUT</h3>
     <div class="about-boxes">
         <div class="about-box responsive" data-aos="fade-up">
             <i class="fas fa-expand-arrows-alt"></i>

@@ -1,7 +1,7 @@
 <?php
     $auth = True;
     $scrollTo = 'none';
-    $active = 'Editor';
+    $active = 'editor';
     $headerClass = 'dashboard';
 ?>
 

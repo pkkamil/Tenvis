@@ -1,7 +1,7 @@
 <?php
     $auth = True;
     $scrollTo = 'none';
-    $active = 'user-posts';
+    $active = 'posts';
     $headerClass = 'dashboard';
 ?>
 

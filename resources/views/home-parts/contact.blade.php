@@ -1,5 +1,6 @@
 <article id="contact">
-    <h3>CONTACT</h3>
+    @csrf
+    <h3 class="title">CONTACT</h3>
     <section class="contact-container" data-aos="fade-up">
     <h5>Ready to start your next project with us?</h5>
     <form action="/send_message.php">

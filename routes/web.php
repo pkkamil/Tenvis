@@ -28,6 +28,7 @@ Route::get('/blog/post/{id}', 'PostsController@find');
 
 // AUTH
 
+Route::post('/dashboard/save', 'UsersController@saveNote')->name('saveNote');
 Route::get('/dashboard/editor', 'PostsController@createPage')->name('editor');
 Route::get('/dashboard/posts', function() {
     if (Auth::user()) {

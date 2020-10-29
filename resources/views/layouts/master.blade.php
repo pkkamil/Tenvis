@@ -37,7 +37,9 @@
         crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" href={{asset("resources/css/style.css")}} />
     <!-- Scripts -->
+    @if ($auth ?? '' != True)
     <script type="text/javascript" defer src={{ asset("resources/js/autoresize.js")}}></script>
+    @endif
     <script type="text/javascript" defer src={{ asset("resources/js/script.js")}}></script>
     @if ($scrollTo == 'about')
     <script type="text/javascript" defer src={{ asset("resources/js/scroll-scripts.js")}}></script>
@@ -51,7 +53,7 @@
 <body>
     @if ($isPost ?? '')
     @include('partials.header-post')
-    @elseif ($auth ?? '' == True)
+    @elseif ($auth ?? '' ?? '' == True)
     @include('partials.header-auth')
     @else
     @include('partials.header')

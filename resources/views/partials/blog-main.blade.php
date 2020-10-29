@@ -7,7 +7,7 @@
 ?>
 
 <article id="blog">
-    <h3>BLOG</h3>
+    <h3 class="title">BLOG</h3>
     <section class="posts-label">
         <span data-filter="all" class="list">all</span>
         @foreach ($categories as $category)
