@@ -238,7 +238,7 @@ label {
     color: #262626;
 }
 
-input {
+#contact input {
     margin-left: 5px;
     transform: translateY(-4px);
     border: 0;
@@ -752,6 +752,7 @@ section.verify form button {
 
 article.dashboard-part {
     height: auto;
+    min-height: 100vh;
     display: flex;
     flex-direction: row;
 }
@@ -766,6 +767,9 @@ article.activity-center {
 article.editor {
     background: url("/resources/img/bg-editor.jpg") no-repeat 50% 50%;
     background-size: cover;
+    padding: 200px 100px;
+    display: block;
+    /* font-family: "Epilogue", sans-serif; */
 }
 
 article.user-posts {
@@ -818,7 +822,8 @@ article.activity-center section.user-section form textarea {
 
 article.activity-center section.user-section form input,
 article.activity-center a.showAll,
-article.activity-center div.emptyPosts a {
+article.activity-center div.emptyPosts a,
+article.editor form button {
     display: block;
     margin: 10px auto;
     font-size: 1.2em;
@@ -839,7 +844,8 @@ article.activity-center div.emptyPosts a {
 
 article.activity-center section.user-section form input:hover,
 article.activity-center a.showAll:hover,
-article.activity-center div.emptyPosts a:hover {
+article.activity-center div.emptyPosts a:hover,
+article.editor form button:hover {
     background-color: #fff;
     color: #262626;
 }
@@ -951,6 +957,100 @@ article.activity-center div.emptyPosts h3 {
 
 article.activity-center div.emptyPosts h4 {
     font-size: 1.1em;
+}
+
+article.editor h2 {
+    color: #FFF;
+    font-size: 1.6em;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+article.editor form:first-child {
+    text-align: left;
+    margin-left: 100px;
+}
+
+article.editor form:first-child button {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 1em;
+    padding: 5px 10px;
+}
+
+article.editor form:first-child input {
+    margin-left: 10px;
+    width: 200px;
+}
+
+article.editor label {
+    font-size: 1.2em;
+    color: #FFF;
+    text-transform: uppercase;
+}
+
+article.editor span {
+    display: block;
+    margin-top: 20px;
+}
+
+article.editor span label {
+    margin-right: 5px;
+}
+
+article.editor label.bk {
+    text-align: left;
+    display: block;
+}
+
+article.editor form:nth-child(2) {
+    display: flex;
+    flex-direction: row;
+}
+
+article.editor form textarea {
+    width: 720px;
+    height: 360px;
+    padding: 15px 20px;
+    font-size: 1em;
+    resize: none;
+    background-color: transparent;
+    outline: none;
+    color: #fff;
+    border: 1px solid #ddd;
+}
+
+article.editor form section {
+    padding: 50px 100px;
+}
+
+article.editor form section.right-part {
+    transform: translateY(-170px);
+}
+
+article.editor form:first-child input,
+article.editor form:nth-child(2) input[type="text"] {
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    color: #FFF;
+    padding: 0px 10px 5px 10px;
+}
+
+article.editor form:nth-child(2) input[type="text"] {
+    width: 100%;
+}
+
+article.editor form input[type="text"]:focus {
+    color: #bbb;
+    border-bottom: 1px solid #fff;
+}
+
+article.editor form input[type="file"] {
+    font-size: .8em;
+    width: 70%;
+    transform: translateY(-2px);
 }
 
 

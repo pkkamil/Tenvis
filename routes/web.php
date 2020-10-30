@@ -22,14 +22,16 @@ Route::get('/login', function () {
     return view('login');
 });
 
-Route::get('/author/{authorId}', 'UsersController@index');
-Route::get('/blog', 'PostsController@index');
-Route::get('/blog/post/{id}', 'PostsController@find');
+Route::get('/author/{authorId}', 'UserController@index');
+Route::get('/blog', 'PostController@index');
+Route::get('/blog/post/{id}', 'PostController@find');
 
 // AUTH
 
-Route::post('/dashboard/save', 'UsersController@saveNote')->name('saveNote');
-Route::get('/dashboard/editor', 'PostsController@createPage')->name('editor');
+Route::post('/dashboard/save', 'UserController@saveNote')->name('saveNote');
+Route::get('/dashboard/editor', 'PostController@create')->name('editor');
+Route::post('/dashboard/editor/create', 'PostController@store')->name('createPost');
+Route::post('/dashboard/editor/tag/create', 'TagController@create')->name('newTag');
 Route::get('/dashboard/posts', function() {
     if (Auth::user()) {
         if (Auth::user() -> hasVerifiedEmail()) {

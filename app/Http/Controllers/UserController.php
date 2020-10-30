@@ -8,7 +8,7 @@ use App\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
-class UsersController extends Controller
+class UserController extends Controller
 {
     public function __construct()
     {

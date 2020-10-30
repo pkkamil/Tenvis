@@ -1,4 +1,5 @@
 <?php
+    $resizer = True;
     $scrollTo = 'about';
     $active = 'home';
     $headerClass = 'home';

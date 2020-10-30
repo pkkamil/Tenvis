@@ -37,7 +37,7 @@
         crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" href={{asset("resources/css/style.css")}} />
     <!-- Scripts -->
-    @if ($auth ?? '' != True)
+    @if ($resizer ?? '' == True)
     <script type="text/javascript" defer src={{ asset("resources/js/autoresize.js")}}></script>
     @endif
     <script type="text/javascript" defer src={{ asset("resources/js/script.js")}}></script>

@@ -1,4 +1,5 @@
 <?php
+    $resizer = True;
     $active = 'blog';
     $isPost = true;
     $scrollTo = '';
