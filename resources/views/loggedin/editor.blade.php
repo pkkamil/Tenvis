@@ -8,21 +8,21 @@
 @extends('layouts.master')
 @section('content')
 <article class="editor dashboard-part">
-    <form action="{{ route('newTag') }}" method="POST">
+    <form action="{{ route('newTag') }}" method="POST" data-aos="fade-right">
         @csrf
         <h2>Create a new tag</h2>
         <span class="tag-span">
-            <label for="newTag">New Tag:</label>
+            <label for="newTag" @error('newTag') style="color: #a32a14" @enderror>New Tag:</label>
             <input type="text" name="newTag" id="newTag">
             <button type="submit">Create</button>
         </span>
     </form>
     <form action="{{ route('createPost') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
         @csrf
-        <section class="left-part">
+        <section class="left-part" data-aos="fade-right" data-aos-delay="800">
             <h2>Creating a new post</h2>
-            <label class="bk" for="title">Title:</label>
-            <input type="text" name="title" id="title">
+            <label class="bk" for="title" @error('title') style="color: #a32a14" @enderror>Title:</label>
+            <input type="text" name="title" id="title" value="{{ old('title') }}">
             <span class="tag-span">
             <label for="tag">Tag:</label>
             <select name="tag" id="tags">
@@ -32,28 +32,35 @@
             </select>
             </span>
             <span class="file-span">
-                <label for="image">Image:</label>
+                <label for="image" @error('image') style="color: #a32a14" @enderror>Image:</label>
                 <input type="file" name="image" id="image">
             </span>
             <span class="file-span">
-                <label for="divider">Divider:</label>
+                <label for="divider" @error('divider') style="color: #a32a14" @enderror>Divider:</label>
                 <input type="file" name="divider" id="divider">
-                </span>
+            </span>
+            <span class="private-span">
+                <label for="privatePost">Private:</label>
+                <input type="checkbox" name="privatePost" id="privatePost">
+            </span>
         </section>
         <section class="right-part">
-            <label class="bk" for="content">Content:</label>
-            <textarea name="content" id="content"></textarea>
-            <button type="submit">Create</button>
+            <div data-aos="fade-left" data-aos-delay="1200">
+                <label class="bk" for="content" @error('content') style="color: #a32a14" @enderror>Content:</label>
+                <textarea class="tinyMCE" name="content" id="content">{{ old('content') }}</textarea>
+                <button type="submit">Create</button>
+                @if ($errors->all())
+                <section class="errors">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li> {{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </section>
+                @endif
+            </div>
         </section>
-        @if ($errors->all())
-        <section style="color: #FFF;">
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li> {{ $error }}</li>
-                @endforeach
-            </ul>
-        </section>
-        @endif
+
     </form>
 </article>
 @endsection

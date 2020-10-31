@@ -73,4 +73,19 @@ AOS.init({
     once: false,
 });
 </script>
+@if ($active == 'editor')
+<script src="https://cdn.tiny.cloud/1/2kse99tmrbyp273iy1jnmdpx30xbkb5t9gf0o9xdkrabelj8/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '.tinyMCE',
+        skin_url: '/resources/ui/DARK',
+        plugins: 'advcode casechange linkchecker autolink lists checklist media mediaembed pageembed powerpaste table advtable tinymcespellchecker format',
+        toolbar: 'undo redo | paste copy cut selectall | styleselect | subscript superscript | bold italic underline strikethrough | align | casechange | bullist numlist outdent indent checklist | code media pageembed | table',
+        toolbar_mode: 'floating',
+        resize: true,
+        width: '100%',
+        height: 560,
+    });
+  </script>
+@endif
 </html>

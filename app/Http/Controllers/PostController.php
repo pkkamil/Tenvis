@@ -35,7 +35,7 @@ class PostController extends Controller
         $req->validate([
             'title' => 'required|min:5|max:50',
             'tag' => 'required',
-            'content' => 'required|max:1000|string',
+            'content' => 'required|max:4294967295|string',
             'image' => 'required|image|max:10240',
             'divider' => 'nullable|image|max:10240',
         ]);
@@ -55,9 +55,12 @@ class PostController extends Controller
         $post -> tag_id = $req -> tag;
         $post -> title = $req -> title;
         $post -> image = $url_bg;
-        // $post -> divider = $url_dv;
+        $post -> divider = $url_dv;
+        if ($req -> privatePost) {
+            $post -> private = True;
+        }
         $post -> content = $req -> content;
         $post -> save();
-        return $post;
+        return redirect('/blog/post/'.$post -> id);
     }
 }

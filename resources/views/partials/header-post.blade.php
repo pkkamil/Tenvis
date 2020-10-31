@@ -1,4 +1,4 @@
-<header class='blog' style="background: url({{$post -> image}}")>
+<header class='blog' style="background: url({{$post -> image}}); background-position: center; background-size: cover;">
     @include('partials.nav')
     <div class="box-header">
         <h3>{{$post -> title}}</h3>

@@ -34,7 +34,7 @@
                             <a href="{{ url('/blog/post/'.$item -> id) }}">
                                 <div class="img-box">
                                     {{-- <img src="{{ $item -> image }}" alt=""> --}}
-                                    <img src="https://images.pexels.com/photos/6992/forest-trees-northwestisbest-exploress.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="">
+                                    <img src="{{ $item -> image }}" alt="">
                                 </div>
                                 <section class="single-blog-inner">
                                     <h4>
