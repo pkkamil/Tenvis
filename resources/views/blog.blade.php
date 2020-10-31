@@ -2,7 +2,6 @@
     $scrollTo = 'blog';
     $active = 'blog';
     $headerClass = 'blog';
-    $bg = 'bg-blog';
     $filter = true
 ?>
 

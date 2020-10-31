@@ -23,21 +23,23 @@
                             </section>
                         </a>
                     </section>
-                @elseif ($post -> private == 1 and Auth::user()-> id == $post -> user_id)
-                <section class="single-blog-outer {{$post -> tag -> name}}">
-                    <a class="view-single-blog" href="/blog/post/{{$post -> id}}">
-                        <div class="img-box">
-                            <img src={{$post -> image}} alt="" />
-                        </div>
-                        <section class="single-blog-inner">
-                            <span data-filter="{{$post -> tag -> name}}" class="img-label list">{{$post -> tag -> name}}</span>
-                            <h4>{{$post -> title}}</h4>
-                            <h5>
-                                <a href="author/{{$authors->find('id', $post -> user_id)}}" class="author">{{$authors->where('id', $post -> user_id)->first()->name}}</a>, {{$post -> updated_at->format('d M Y')}}&nbsp;{{$post -> updated_at->format('H:m:s')}}
-                            </h5>
+                @elseif (Auth::user())
+                    @if ($post -> private == 1 and Auth::user()-> id == $post -> user_id)
+                        <section class="single-blog-outer {{$post -> tag -> name}}">
+                            <a class="view-single-blog" href="/blog/post/{{$post -> id}}">
+                                <div class="img-box">
+                                    <img src={{$post -> image}} alt="" />
+                                </div>
+                                <section class="single-blog-inner">
+                                    <span data-filter="{{$post -> tag -> name}}" class="img-label list">{{$post -> tag -> name}}</span>
+                                    <h4>{{$post -> title}}</h4>
+                                    <h5>
+                                        <a href="author/{{$authors->find('id', $post -> user_id)}}" class="author">{{$authors->where('id', $post -> user_id)->first()->name}}</a>, {{$post -> updated_at->format('d M Y')}}&nbsp;{{$post -> updated_at->format('H:m:s')}}
+                                    </h5>
+                                </section>
+                            </a>
                         </section>
-                    </a>
-                </section>
+                    @endif
                 @endif
             @endforeach
     </article>

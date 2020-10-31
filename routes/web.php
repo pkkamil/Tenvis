@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +20,8 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::post('/contact/send', 'MailController@contact');
+
 Route::get('/login', function () {
     return view('login');
 });
@@ -25,6 +29,7 @@ Route::get('/login', function () {
 Route::get('/author/{authorId}', 'UserController@index');
 Route::get('/blog', 'PostController@index');
 Route::get('/blog/post/{id}', 'PostController@find');
+Route::post('/comments/add', 'PostController@addComment')->name('addComment');
 
 // AUTH
 
@@ -56,3 +61,4 @@ Route::get('/dashboard/account', function() {
 Auth::routes(['verify' => true]);
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('verified');
+

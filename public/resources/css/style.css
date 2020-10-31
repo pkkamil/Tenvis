@@ -238,7 +238,7 @@ label {
     color: #262626;
 }
 
-#contact input {
+article#contact input {
     margin-left: 5px;
     transform: translateY(-4px);
     border: 0;
@@ -255,7 +255,7 @@ textarea {
     font-size: 1em;
 }
 
-input[type="email"] {
+article#contact input[type="email"] {
     width: 200px;
 }
 
@@ -297,11 +297,15 @@ article#comments span.noComments h5 {
 
 article#contact form input[type="submit"],
 article#comments section.writeComment input[type='submit'] {
-    border-radius: 50px;
     background-color: #262626;
     color: #fff;
     font-size: 1.1em;
-    padding: 10px 15px;
+    outline: none;
+    border: 0;
+    width: 140px;
+    text-transform: uppercase;
+    font-family: "Epilogue", sans-serif;
+    padding: 15px 20px;
     transition: 1s background-color;
 }
 
@@ -312,8 +316,64 @@ article#comments section.writeComment input[type='submit']:active {
     background-color: #444;
 }
 
-section.posts-label {
+article.success-contact {
+    width: 100%;
+    height: 100vh;
+    background: url("/resources/img/bg-success.jpg") no-repeat 50% 50%;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    flex-direction: column;
+    font-family: "Epilogue", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+article.success-contact span {
+    margin-bottom: 100px;
+}
+
+article.success-contact h3 {
+    font-weight: 700;
+    color: #109137;
+    font-size: 2em;
+    letter-spacing: 2px;
+}
+
+article.success-contact h4 {
+    font-weight: 700;
+    color: #FFF;
+    font-size: 1.1em;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+article.success-contact a {
+    margin: 0 auto;
+    font-size: 1.2em;
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: transparent;
+    border: 2px solid #fff;
+    outline: none;
+    text-transform: uppercase;
+    color: #fff;
+    cursor: pointer;
+    transition: .6s background-color, .6s color;
+}
+
+article.success-contact a:hover {
+    background-color: #fff;
+    color: #262626;
+}
+
+section.posts-label {
+    display: flex;
+    margin: 0 100px;
+    flex-wrap: wrap;
+    justify-content: center;
     margin-bottom: 50px;
 }
 
@@ -323,6 +383,8 @@ section.posts-label span {
     background-color: #999;
     padding: 10px 20px;
     transition: 1s background-color;
+    margin-left: 10px;
+    margin-top: 10px;
 }
 
 section.posts-label span:hover {
@@ -1073,14 +1135,18 @@ article.editor form input[type="file"] {
     transform: translateY(-2px);
 }
 
-article.editor form section.right-part section.errors {
+section.errors {
     text-align: center;
     color: #942121;
     margin-top: 5px;
 }
 
-article.editor form section.right-part section.errors ul {
+section.errors ul {
     list-style-type: none;
+}
+
+article#comments section.errors {
+    margin-top: 20px;
 }
 
 input[type="checkbox"] {
@@ -1490,6 +1556,10 @@ footer .description {
     article.activity-center.founded .new-posts .single-blog-outer {
         width: 100%;
     }
+    section.posts-label {
+        margin: 0 50px;
+        margin-bottom: 50px;
+    }
 }
 
 @media (max-width: 700px) {
@@ -1610,6 +1680,10 @@ footer .description {
     article.editor span.tag-span button {
         margin-top: 20px;
     }
+    section.posts-label {
+        margin: 0 20px;
+        margin-bottom: 40px;
+    }
 }
 
 @media (max-width: 450px) {
@@ -1634,7 +1708,7 @@ footer .description {
     article .about-boxes .about-box {
         padding: 0 50px;
     }
-    article#contanct input {
+    article#contact input {
         text-align: center;
     }
     article#contact form #lname,

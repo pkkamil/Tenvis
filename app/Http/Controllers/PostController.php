@@ -13,6 +13,11 @@ use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified'])->except('index', 'find');
+    }
+
     public function index() {
         $posts = Post::orderBy('created_at', 'desc')->get();
         $authors = User::all();
@@ -36,19 +41,19 @@ class PostController extends Controller
             'title' => 'required|min:5|max:50',
             'tag' => 'required',
             'content' => 'required|max:4294967295|string',
-            'image' => 'required|image|max:10240',
-            'divider' => 'nullable|image|max:10240',
+            'image' => 'required|mimes:jpeg,png,jpg,gif,bmp|image|max:10240',
+            'divider' => 'nullable|mimes:jpeg,png,jpg,gif,bmp|image|max:10240',
         ]);
         // Image
         $img_name = Str::random(30);
         $extension = $req -> image -> extension();
-        $req -> image -> storeAs('/public', $img_name."-bg.".$extension);
-        $url_bg = Storage::url($img_name."-bg.".$extension);
+        $req -> image -> storeAs('/public', "post/".$img_name."-bg.".$extension);
+        $url_bg = Storage::url("post/".$img_name."-bg.".$extension);
         // Divider
         if ($req -> divider) {
             $extension = $req -> divider -> extension();
-            $req -> divider -> storeAs('/public', $img_name."-dv.".$extension);
-            $url_dv = Storage::url($img_name."-dv.".$extension);
+            $req -> divider -> storeAs('/public', "post/".$img_name."-dv.".$extension);
+            $url_dv = Storage::url("post/".$img_name."-dv.".$extension);
         }
         $post = new Post;
         $post -> user_id = Auth::user()->id;
@@ -62,5 +67,17 @@ class PostController extends Controller
         $post -> content = $req -> content;
         $post -> save();
         return redirect('/blog/post/'.$post -> id);
+    }
+
+    public function addComment(Request $req) {
+        $req->validate([
+            'message' => 'required|max:500|string',
+        ]);
+        $comment = new Comment;
+        $comment -> post_id = $req -> post_id;
+        $comment -> user_id = Auth::user() -> id;
+        $comment -> content = $req -> message;
+        $comment -> save();
+        return redirect('/blog/post/'.$req -> post_id);
     }
 }

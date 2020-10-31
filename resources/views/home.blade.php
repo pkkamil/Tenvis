@@ -3,7 +3,6 @@
     $scrollTo = 'about';
     $active = 'home';
     $headerClass = 'home';
-    $bg = 'bg-main';
 ?>
 
 @extends('layouts.master')

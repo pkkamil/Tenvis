@@ -8,8 +8,8 @@
     @endif
     @foreach ($comments as $comment)
         <span class="single-comment">
-            <img src="/resources/img/avatars/{{$comment -> avatar}}" class="avatar" />
-            <span class="name">{{$comment -> name}}</span>
+        <img src="{{ $comment -> user -> avatar }}" class="avatar" />
+            <span class="name">{{ $comment -> user -> name }}</span>
             <span class="wrote">wrote:</span>
             <span class="comment-content">
                 {{$comment -> content}}
@@ -21,11 +21,22 @@
     @endforeach
     <section class="writeComment" data-aos="fade-up">
         <h3 class="title">Write your opinion!</h3>
-        <form action="../../write_comment.php">
+    <form action="{{ route('addComment') }}" method="POST">
+            @csrf
+            <input type="hidden" name="post_id" value="{{$post -> id}}" >
             <textarea name="message" id="message"
                 placeholder="Whether it is the mob on the street, or the cancel culture in the boardroom, the goal is the same."
                 rows="5"></textarea>
             <input type="submit" value="Write" />
+            @if ($errors->all())
+            <section class="errors">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li> {{ $error }}</li>
+                    @endforeach
+                </ul>
+            </section>
+            @endif
         </form>
     </section>
 </article>
