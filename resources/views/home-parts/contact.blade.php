@@ -6,15 +6,15 @@
     <form action="/contact/send" method="POST">
         @csrf
         <fieldset class="top">
-            <label for="name" id="lname">Your name:</label>
-            <input type="text" id="name" name="name" placeholder="John" maxlength="12" />
+            <label for="name" id="lname" @error('name') style="color: #a32a14;" @enderror>Your name:</label>
+            <input type="text" id="name" name="name" placeholder="John" maxlength="12" value="{{ old('name') }}"/>
             <br class="form-divider" />
-            <label for="email" id="lemail">Your email:</label>
-            <input type="email" id="email" name="email" placeholder="john@gmail.com" />
+            <label for="email" id="lemail" @error('email') style="color: #a32a14;" @enderror>Your email:</label>
+            <input type="email" id="email" name="email" placeholder="john@gmail.com" value="{{ old('email') }}"/>
         </fieldset>
-        <label for="message" id="lmessage">Message:</label>
+        <label for="message" id="lmessage" @error('message') style="color: #a32a14;" @enderror>Message:</label>
         <fieldset class="bottom">
-            <textarea name="message" id="message" placeholder="Hello guys! Can you design website for me?" rows="5"></textarea>
+        <textarea name="message" id="message" placeholder="Hello guys! Can you design website for me?" rows="5">{{ old('message') }}</textarea>
         </fieldset>
         <input type="submit" value="Send" />
     </form>

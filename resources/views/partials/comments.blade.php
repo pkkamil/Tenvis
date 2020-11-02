@@ -1,12 +1,12 @@
 <article id="comments">
     <h3 class="title">Comments</h3>
-    @if (count($comments) == 0)
+    @if (count($post -> comments) == 0)
         <span class="noComments">
             <h4>There are no comments.</h4>
             <h5>Write a comment and it will appear here.</h5>
         </span>
     @endif
-    @foreach ($comments as $comment)
+    @foreach ($post -> comments as $comment)
         <span class="single-comment">
         <img src="{{ $comment -> user -> avatar }}" class="avatar" />
             <span class="name">{{ $comment -> user -> name }}</span>
@@ -26,7 +26,7 @@
             <input type="hidden" name="post_id" value="{{$post -> id}}" >
             <textarea name="message" id="message"
                 placeholder="Whether it is the mob on the street, or the cancel culture in the boardroom, the goal is the same."
-                rows="5"></textarea>
+                rows="5" maxlength="500">{{ old('message') }}</textarea>
             <input type="submit" value="Write" />
             @if ($errors->all())
             <section class="errors">

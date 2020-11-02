@@ -15,9 +15,6 @@
     @if ($active == 'verify')
     @include('partials.verify-box')
     @endif
-    @if ($active == 'author')
-    @include('partials.author-box')
-    @endif
 </header>
 
 

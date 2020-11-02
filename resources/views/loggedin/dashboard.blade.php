@@ -24,38 +24,39 @@
     <section class="@if (count($posts) == 0)null-posts @else new-posts @endif">
         @if (Auth::user()->role != 'Reader')
             <h2 data-aos='fade-up'>Recently added posts:</h2>
-        @endif
-        @if (count($posts) > 0)
-            <section class="posts-list">
-                @foreach ($posts as $item)
-                    @if ($loop -> index != 3)
-                        @csrf
-                        <section class="single-blog-outer" data-aos="fade-up" data-aos-delay="{{400 * $loop->iteration}}">
-                            <a href="{{ url('/blog/post/'.$item -> id) }}">
-                                <div class="img-box">
-                                    {{-- <img src="{{ $item -> image }}" alt=""> --}}
-                                    <img src="{{ $item -> image }}" alt="">
-                                </div>
-                                <section class="single-blog-inner">
-                                    <h4>
-                                        {{$item -> title}}
-                                    </h4>
-                                    <h5>
-                                    <a href="author/{{ $item->user_id }}" class="author">{{App\User::find($item -> user_id)->name}}</a>, {{$item -> updated_at->format('d M Y')}}&nbsp;{{$item -> updated_at->format('H:m:s')}}
-                                    </h5>
-                                </section>
-                            </a>
-                        </section>
-                    @endif
-                @endforeach
-            </section>
-            {{-- <span class="other-count">+5 więcej</span> --}}
+            @if (count($posts) > 0)
+                <section class="posts-list">
+                    @foreach ($posts as $item)
+                        @if ($loop -> index != 3)
+                            @csrf
+                            <section class="single-blog-outer" data-aos="fade-up" data-aos-delay="{{400 * $loop->iteration}}">
+                                <a href="{{ url('/blog/post/'.$item -> id) }}">
+                                    <div class="img-box">
+                                        {{-- <img src="{{ $item -> image }}" alt=""> --}}
+                                        <img src="{{ $item -> image }}" alt="">
+                                    </div>
+                                    <section class="single-blog-inner">
+                                        <h4>
+                                            {{$item -> title}}
+                                        </h4>
+                                        <h5>
+                                        <a href="author/{{ $item->user_id }}" class="author">{{App\User::find($item -> user_id)->name}}</a>, {{$item -> updated_at->format('d M Y')}}&nbsp;{{$item -> updated_at->format('H:m:s')}}
+                                        </h5>
+                                    </section>
+                                </a>
+                            </section>
+                        @endif
+                    @endforeach
+                </section>
+                {{-- <span class="other-count">+5 więcej</span> --}}
+            @endif
             @if (count($posts) > 3)
                 <div data-aos='fade-up' data-aos-delay="1600">
-                    <a href="{{url('/blog')}}" class="showAll">See all</a>
+                    <a href="{{ route('userPosts') }}" class="showAll">See all</a>
                 </div>
             @endif
         @else
+        <h2 data-aos='fade-up'>You cannot create posts.</h2>
             <div class="emptyPosts">
                 @if (Auth::user()->role == 'Admin')
                     <div data-aos='fade-up' data-aos-delay="400">
@@ -71,9 +72,9 @@
                         <a href="{{ route('editor') }}">Dodaj nowy post</a>
                     </div>
                 @else
-                    <div data-aos='fade-up' data-aos-delay="400">
+                    <div data-aos='fade-up' data-aos-delay="400" class="reader">
                         <h3>Your account role is reader.</h3>
-                        <h4>To become a writer you must submit a request to become a writer.</h4>
+                        <h4>To create your own posts you need to send a request to us.</h4>
                     </div>
                     <div data-aos="fade-up" data-aos-delay="800">
                         <a href="{{ route('editor') }}">Send request</a>

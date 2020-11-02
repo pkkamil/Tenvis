@@ -50,17 +50,15 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 </head>
 
-<body>
+<body @if ($auth ?? '' or $dark ?? '') class="auth" @endif>
     @if ($isPost ?? '')
     @include('partials.header-post')
-    @elseif ($auth ?? '' ?? '' == True)
+    @elseif ($auth ?? '' ?? '' ?? '' == True)
     @include('partials.header-auth')
     @else
     @include('partials.header')
     @endif
-
     @yield('content')
-
     @include('partials.footer')
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"
@@ -87,5 +85,12 @@ AOS.init({
         height: 560,
     });
   </script>
+@endif
+@if ($active == 'posts')
+<script>
+    $(window).on("load",function(){
+        $(".loader-container").fadeOut(1000);
+    });
+</script>
 @endif
 </html>

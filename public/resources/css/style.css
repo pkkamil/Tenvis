@@ -1,21 +1,54 @@
 @import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700&display=swap');
-* {
+*:not(ul,
+ul *) {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-h2 {
-    font-size: 1.5rem;
-}
-
-h3 {
-    font-size: 1.17rem;
-}
-
 body {
     font-family: "Helvetica Neue", sans-serif;
     font-size: 18px;
+}
+
+.loader-container {
+    width: 100%;
+    height: 100vh;
+    background-color: #111;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 5px solid;
+    color: #3498db;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: loader 1.2s linear infinite;
+}
+
+@keyframes loader {
+    25% {
+        color: #2ecc71;
+    }
+    50% {
+        color: #f1c40f;
+    }
+    75% {
+        color: #e74c3c;
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+body.auth {
+    background-color: #262626;
 }
 
 a {
@@ -153,7 +186,7 @@ nav.black ul li a.active {
     cursor: pointer;
 }
 
-article {
+article:not(.auth) {
     width: 100%;
     background: #fff;
 }
@@ -854,20 +887,27 @@ article.user-posts {
     background: url("/resources/img/bg-user_posts.jpg") no-repeat 50% 50%;
     background-size: cover;
     background-attachment: fixed;
+    padding: 200px 0px 50px 0px;
+    display: block;
+    font-family: "Epilogue", sans-serif;
 }
 
 article.account {
     background: url("/resources/img/bg-account2.jpg") no-repeat 50% 50%;
     background-size: cover;
+    padding: 200px 0px 50px 0px;
+    display: block;
+    font-family: "Epilogue", sans-serif;
 }
 
-article.activity-center section.user-section {
+article.activity-center section.user-section,
+article.account section.account-settings {
     text-align: center;
     padding: 0 50px;
 }
 
 article.activity-center section.user-section img,
-article.user-options img {
+section.account-settings img {
     width: 128px;
     height: 128px;
     border-radius: 100%;
@@ -882,6 +922,7 @@ article.activity-center section.user-section h2 {
 }
 
 article.activity-center section.user-section h3 {
+    font-size: 1.17em;
     margin: 10px 0;
     color: #fff;
     text-decoration: none;
@@ -902,7 +943,8 @@ article.activity-center section.user-section form textarea {
 article.activity-center section.user-section form input,
 article.activity-center a.showAll,
 article.activity-center div.emptyPosts a,
-article.editor form button {
+article.editor form button,
+article.account div a {
     display: block;
     margin: 10px auto;
     font-size: 1.2em;
@@ -925,7 +967,8 @@ article.activity-center div.emptyPosts a {
 article.activity-center section.user-section form input:hover,
 article.activity-center a.showAll:hover,
 article.activity-center div.emptyPosts a:hover,
-article.editor form button:hover {
+article.editor form button:hover,
+article.account div a:hover {
     background-color: #fff;
     color: #262626;
 }
@@ -957,7 +1000,6 @@ article.activity-center .single-blog-outer {
 }
 
 article.activity-center .single-blog-outer a {
-    text-decoration: none;
     color: #262626;
 }
 
@@ -978,10 +1020,6 @@ article.activity-center .single-blog-outer .single-blog-inner h4 {
     color: #262626;
     margin-top: 10px;
     font-size: 1.1em;
-}
-
-a.author:hover {
-    text-decoration: underline;
 }
 
 article.activity-center .single-blog-outer .single-blog-inner h5 {
@@ -1014,9 +1052,9 @@ article.activity-center .single-blog-outer .img-box img {
 
 article.activity-center .single-blog-outer:hover .single-blog-inner {
     cursor: pointer;
-    -webkit-box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.5);
-    box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0px 0px 15px 10px rgba(255, 255, 255, 0.2);
+    -moz-box-shadow: 0px 0px 15px 10px rgba(255, 255, 255, .2);
+    box-shadow: 0px 0px 15px 10px rgba(255, 255, 255, .2);
     transform: scale(1.04);
 }
 
@@ -1028,6 +1066,10 @@ article.activity-center .single-blog-outer:hover .img-box {
 article.activity-center div.emptyPosts {
     color: #fff;
     text-align: left;
+}
+
+article.activity-center div.emptyPosts .reader {
+    color: #262626;
 }
 
 article.activity-center div.emptyPosts h3 {
@@ -1201,6 +1243,83 @@ input:checked[type="checkbox"]::after {
     background: #63cdff;
     left: 50px;
     box-shadow: 0 0 5px #13b3ff, 0 0 15px #13b3ff;
+}
+
+article.user-posts h2 {
+    font-size: 2em;
+    text-transform: uppercase;
+    color: #FFF;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+
+/* article.user-posts article.blog-section {
+    background-color: transparent;
+} */
+
+article.user-posts article.blog-section section.single-blog-inner {
+    background-color: #eee;
+}
+
+article.user-posts article.blog-section .single-blog-outer a {
+    color: #262626;
+}
+
+article.user-posts .single-blog-outer .single-blog-inner h4 {
+    color: #262626;
+}
+
+article.user-posts .single-blog-outer:hover .single-blog-inner {
+    cursor: pointer;
+    -webkit-box-shadow: 0px 0px 15px 10px rgba(255, 255, 255, .2);
+    -moz-box-shadow: 0px 0px 15px 10px rgba(255, 255, 255, .2);
+    box-shadow: 0px 0px 15px 10px rgba(255, 255, 255, .2);
+    transform: scale(1.04);
+}
+
+article.account section.account-settings {
+    display: flex;
+    flex-direction: row;
+}
+
+.unknown {
+    color: #555;
+}
+
+article.account section.account-settings section.left-part {
+    padding: 0px 50px;
+    width: 50%;
+}
+
+article.account section.account-settings section.left-part h4 {
+    color: #ccc;
+}
+
+article.account section.account-settings section.left-part h4.name {
+    margin-top: 20px;
+}
+
+article.account section.account-settings h4 span.title-tag {
+    color: #fff;
+    text-transform: uppercase;
+}
+
+article.account section.account-settings section.right-part {
+    margin: 0 auto;
+}
+
+article.account section.account-settings section.right-part h2 {
+    font-size: 1.7em;
+    margin-top: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #FFF;
+}
+
+article.account section.account-settings section.right-part div a {
+    font-size: 1em;
+    margin-top: 20px;
 }
 
 
@@ -1377,6 +1496,15 @@ footer .description {
         text-align: center;
         color: #fff;
     }
+    article.activity-center div.emptyPosts {
+        text-align: center;
+    }
+    article.activity-center div.emptyPosts h3 {
+        color: #eee;
+    }
+    article.activity-center div.emptyPosts h4 {
+        color: #ddd;
+    }
 }
 
 @media (max-width: 1200px) {
@@ -1465,6 +1593,22 @@ footer .description {
     }
     article.activity-center.founded .new-posts {
         padding: 0 30px;
+    }
+    article.account {
+        padding: 150px 0px 50px 0px;
+    }
+    article.account section.account-settings {
+        flex-direction: column;
+    }
+    article.account section.account-settings section.left-part {
+        width: 100%;
+        margin-bottom: 50px;
+    }
+    article.account section.account-settings section.left-part h4 {
+        margin-top: 5px;
+    }
+    .unknown {
+        color: #aaa;
     }
 }
 
@@ -1566,6 +1710,9 @@ footer .description {
     article.activity-center .approvement-list {
         padding: 0 50px;
     }
+    article.account {
+        font-size: 15px;
+    }
 }
 
 @media (max-width: 600px) {
@@ -1609,6 +1756,12 @@ footer .description {
     }
     article.editor {
         font-size: 14px;
+    }
+    article.account {
+        font-size: 14px;
+    }
+    article.account h4 span.bk {
+        display: block;
     }
 }
 
@@ -1683,6 +1836,9 @@ footer .description {
     section.posts-label {
         margin: 0 20px;
         margin-bottom: 40px;
+    }
+    article.account section.account-settings section.left-part {
+        padding: 0;
     }
 }
 
@@ -1759,6 +1915,9 @@ footer .description {
     }
     article.activity-center.founded .new-posts {
         padding: 0 10px;
+    }
+    article.account {
+        font-size: 13px;
     }
 }
 

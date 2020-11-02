@@ -18,7 +18,7 @@
                                 <span data-filter="{{$post -> tag -> name}}" class="img-label list">{{$post -> tag -> name}}</span>
                                 <h4>{{$post -> title}}</h4>
                                 <h5>
-                                    <a href="author/{{$authors->find('id', $post -> user_id)}}" class="author">{{$authors->where('id', $post -> user_id)->first()->name}}</a>, {{$post -> updated_at->format('d M Y')}}&nbsp;{{$post -> updated_at->format('H:m:s')}}
+                                    <a href="profile/{{$post -> user -> id}}" class="author">{{$post -> user -> name}}</a>, {{$post -> updated_at->format('d M Y')}}&nbsp;{{$post -> updated_at->format('H:m:s')}}
                                 </h5>
                             </section>
                         </a>
@@ -34,7 +34,7 @@
                                     <span data-filter="{{$post -> tag -> name}}" class="img-label list">{{$post -> tag -> name}}</span>
                                     <h4>{{$post -> title}}</h4>
                                     <h5>
-                                        <a href="author/{{$authors->find('id', $post -> user_id)}}" class="author">{{$authors->where('id', $post -> user_id)->first()->name}}</a>, {{$post -> updated_at->format('d M Y')}}&nbsp;{{$post -> updated_at->format('H:m:s')}}
+                                        <a href="profile/{{$post -> user -> id}}" class="author">{{$post -> user -> name}}</a>, {{$post -> updated_at->format('d M Y')}}&nbsp;{{$post -> updated_at->format('H:m:s')}}
                                     </h5>
                                 </section>
                             </a>

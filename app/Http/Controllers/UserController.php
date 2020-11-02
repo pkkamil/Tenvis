@@ -10,15 +10,13 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware(['auth', 'verified'])->except('index');
     }
 
-    public function index($authorId)
-    {
-        $author = User::find($authorId);
-        return view('author', compact('author'));
+    public function index($profileId) {
+        $profile = User::find($profileId);
+        return view('profile', compact('profile'));
     }
 
     public function options() {

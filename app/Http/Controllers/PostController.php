@@ -20,18 +20,26 @@ class PostController extends Controller
 
     public function index() {
         $posts = Post::orderBy('created_at', 'desc')->get();
-        $authors = User::all();
         $tags = Tag::all();
-        return view('blog', compact('posts', 'authors', 'tags'));
+        return view('blog', compact('posts', 'tags'));
     }
+
+    public function authorPosts($profileId) {
+        $posts = Post::orderBy('created_at', 'desc')->where('user_id', $profileId)->get();
+        $tags = Tag::all();
+        return view('blog', compact('posts', 'tags'));
+    }
+
     public function find($id) {
         $post = Post::find($id);
         $author = User::find($post->user_id);
-        $comments = Comment::where('post_id', $id)->get();
 
-        return view('post', compact('post', 'comments', 'author'));
+        return view('post', compact('post', 'author'));
     }
     public function create() {
+        if (Auth::user() -> role == 'Reader') {
+            return redirect('/dashboard');
+        }
         $tags = Tag::all();
         return view('loggedin.editor', compact('tags'));
     }

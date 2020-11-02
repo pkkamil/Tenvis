@@ -20,9 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('telephone')->unique()->nullable();
             $table->string('note', 120)->nullable();
-            $table->string('about_me', 200)->nullable();
             $table->string('avatar')->default('notloggedin'.rand(1, 10).'.png');
-            $table->string('role')->default('reader');
+            $table->string('role')->default('Reader');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

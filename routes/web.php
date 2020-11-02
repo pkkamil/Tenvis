@@ -26,9 +26,10 @@ Route::get('/login', function () {
     return view('login');
 });
 
-Route::get('/author/{authorId}', 'UserController@index');
 Route::get('/blog', 'PostController@index');
 Route::get('/blog/post/{id}', 'PostController@find');
+Route::get('/profile/{profileId}', 'UserController@index');
+Route::get('/blog/author/{profileId}', 'PostController@authorPosts');
 Route::post('/comments/add', 'PostController@addComment')->name('addComment');
 
 // AUTH
@@ -37,14 +38,7 @@ Route::post('/dashboard/save', 'UserController@saveNote')->name('saveNote');
 Route::get('/dashboard/editor', 'PostController@create')->name('editor');
 Route::post('/dashboard/editor/create', 'PostController@store')->name('createPost');
 Route::post('/dashboard/editor/tag/create', 'TagController@create')->name('newTag');
-Route::get('/dashboard/posts', function() {
-    if (Auth::user()) {
-        if (Auth::user() -> hasVerifiedEmail()) {
-            $posts = Auth::user() -> posts;
-            return view('loggedin.user-posts')->with('posts', $posts);
-        }
-    }
-})->name('user_posts');
+Route::get('/dashboard/posts', 'DashboardController@posts')->name('userPosts');
 Route::get('/dashboard/account', function() {
     if (Auth::user()) {
         if (Auth::user() -> hasVerifiedEmail()) {

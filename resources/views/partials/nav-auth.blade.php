@@ -9,7 +9,7 @@
         <ul>
             <li><a @if ($active == 'dashboard') class="active" @endif href="/dashboard">Dashboard</a></li>
         <li><a @if ($active == 'editor') class="active" @endif href="{{ route('editor') }}">Editor</a></li>
-            <li><a @if ($active == 'posts') class="active" @endif href="{{ route('user_posts') }}">Posts</a></li>
+            <li><a @if ($active == 'posts') class="active" @endif href="{{ route('userPosts') }}">Posts</a></li>
             <li><a @if ($active == 'account') class="active" @endif href="{{ route('account') }}">Account</a></li>
             <li>
                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
