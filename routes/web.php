@@ -39,13 +39,16 @@ Route::get('/dashboard/editor', 'PostController@create')->name('editor');
 Route::post('/dashboard/editor/create', 'PostController@store')->name('createPost');
 Route::post('/dashboard/editor/tag/create', 'TagController@create')->name('newTag');
 Route::get('/dashboard/posts', 'DashboardController@posts')->name('userPosts');
-Route::get('/dashboard/account', function() {
-    if (Auth::user()) {
-        if (Auth::user() -> hasVerifiedEmail()) {
-            return view('loggedin.account');
-        }
-    }
-})->name('account');
+Route::get('/dashboard/users', 'DashboardController@users')->name('manageUsers');
+Route::post('/dashboard/account/edit/save', 'UserController@edit')->name('editAccount');
+
+Route::middleware(['auth', 'verified'])->group(function() {
+    Route::view('/dashboard/account', 'loggedin.account')->name('account');
+    Route::view('/dashboard/account/edit', 'loggedin.account-edit');
+    Route::view('/dashboard/account/delete', 'loggedin.confirmation');
+    Route::post('/dashboard/account/delete/confirm', 'UserController@delete')->name('deleteUser');
+});
+
 
 // Route::get('/blog/post/{id}', function ($id) {
 //     return view('post', compact('id'));

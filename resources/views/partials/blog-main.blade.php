@@ -1,5 +1,8 @@
 <article id="blog">
     <h3 class="title">BLOG</h3>
+    @if (stristr(Request::url(), 'author'))
+        <h4 class="author-blog">Posts created by {{ $posts[0] -> user -> name }}</h4>
+    @endif
     <section class="posts-label">
         <span data-filter="all" class="list">all</span>
         @foreach ($tags as $category)

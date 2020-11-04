@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Post;
+use App\User;
 use App\Tag;
 
 class DashboardController extends Controller
@@ -39,5 +40,14 @@ class DashboardController extends Controller
         $posts = Post::orderBy('created_at', 'desc')->get();
         $tags = Tag::all();
         return view('loggedin.user-posts', compact('posts', 'tags'));
+    }
+
+    public function users() {
+        if (Auth::user() -> role == 'Admin') {
+            $users = User::paginate(10);
+            return view('loggedin.users-list', compact('users'));
+        } else {
+            return redirect('/dashboard');
+        }
     }
 }
