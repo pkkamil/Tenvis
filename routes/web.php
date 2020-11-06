@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
+use App\User;
+use App\Post;
+use App\Tag;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,12 +42,33 @@ Route::post('/dashboard/editor/tag/create', 'TagController@create')->name('newTa
 Route::get('/dashboard/posts', 'DashboardController@posts')->name('userPosts');
 Route::get('/dashboard/users', 'DashboardController@users')->name('manageUsers');
 Route::post('/dashboard/account/edit/save', 'UserController@edit')->name('editAccount');
+Route::post('/profile/edit/save', 'UserController@editUser')->name('editUser');
+Route::post('/blog/post/edit/save', 'PostController@editPost')->name('editPost');
 
 Route::middleware(['auth', 'verified'])->group(function() {
+    Route::get('/blog/post/{postId}/edit', function($postId) {
+        if (Auth:: user() -> role == 'Admin') {
+            $post = Post::find($postId);
+            $tags = Tag::all();
+            return view('loggedin.post-edit', compact('post', 'tags'));
+        } else {
+            return view('account');
+        }
+    });
+    Route::get('/profile/{profileId}/edit', 'UserController@editOtherUser');
+    Route::get('/profile/{profileId}/delete', function($profileId) {
+        if (Auth:: user() -> role == 'Admin') {
+            $user = User::find($profileId);
+            return view('loggedin.user-delete', compact('user'));
+        } else {
+            return view('account');
+        }
+    });
     Route::view('/dashboard/account', 'loggedin.account')->name('account');
     Route::view('/dashboard/account/edit', 'loggedin.account-edit');
     Route::view('/dashboard/account/delete', 'loggedin.confirmation');
     Route::post('/dashboard/account/delete/confirm', 'UserController@delete')->name('deleteUser');
+    Route::post('/profile/delete/confirm', 'UserController@deleteOtherUser')->name('deleteOtherUser');
 });
 
 

@@ -13,11 +13,11 @@ class TagController extends Controller
 
     public function create(Request $req) {
         $req -> validate([
-            'newTag' => 'required|alpha'
+            'name' => 'required|alpha|unique:tags'
         ]);
         $tag = new Tag;
-        $tag -> name = $req -> newTag;
+        $tag -> name = $req -> name;
         $tag -> save();
-        return redirect('/dashboard/editor');
+        return redirect(url() -> previous());
     }
 }

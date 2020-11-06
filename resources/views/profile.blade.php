@@ -21,14 +21,19 @@
         </section>
         <section class="right-part">
             <h2 data-aos="fade-left" data-aos-delay="500">Actions</h2>
-            <div data-aos="fade-" data-aos-delay="800">
+            @if (Auth::user() -> role == 'Admin')
+            <div data-aos="fade-left" data-aos-delay="600">
+                <a href="{{ url('/profile/'.$profile -> id.'/edit') }}">Edit user</a>
+            </div>
+            @endif
+            <div data-aos="fade-left" data-aos-delay="800">
             <a href="{{ url('/blog/author/'.$profile -> id) }}">{{ $profile -> name }}'s posts</a>
             </div>
             <div data-aos="fade-left" data-aos-delay="1100">
                 <a href="">Send message</a>
             </div>
             <div data-aos="fade-left" data-aos-delay="1400">
-            <a href="{{ url('/blog/') }}">Back</a>
+            <a href="{{ url()->previous() }}">Back</a>
             </div>
         </section>
     </section>

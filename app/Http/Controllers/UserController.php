@@ -61,9 +61,44 @@ class UserController extends Controller
         return redirect('/dashboard/account');
     }
 
+    public function editOtherUser($profileId) {
+        $user = User::find($profileId);
+        return view('loggedin.user-edit', compact('user'));
+    }
+
+    public function editUser(Request $req) {
+        $req -> telephone = (int)$req -> telephone;
+        $req->validate([
+            'avatar' => ['nullable','image', 'max:10240'],
+            'name' => ['required', 'string', 'min:2', 'max:25'],
+            'email' => ['required', 'string', 'email', 'max:50'],
+            'age' => ['nullable','numeric', 'max:120'],
+            'telephone' => ['nullable', 'numeric'],
+        ]);
+        $user = User::find($req -> profileId);
+        $user -> name = $req -> name;
+        $user -> email = $req -> email;
+        $user -> age = $req -> age;
+        $user -> telephone = $req -> telephone;
+        if($req -> avatar != null) {
+            $img_name = Str::random(30);
+            $extension = $req -> avatar -> extension();
+            $req -> avatar -> storeAs('/public', "avatar/".$img_name.".".$extension);
+            $avatar = Storage::url("avatar/".$img_name.".".$extension);
+            $user->avatar = $avatar;
+        }
+        $user->save();
+        return redirect('/profile/'.$req -> profileId);
+    }
+
     public function delete() {
-        dd(Auth::user());
         Auth::user()->delete();
         return redirect('/');
     }
+
+    public function deleteOtherUser(Request $req) {
+        User::find($req -> profileId)->delete();
+        return redirect('/dashboard/users');
+    }
+
 }

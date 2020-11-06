@@ -54,7 +54,9 @@
             </tr>
         @endforeach
     </table>
-{{ $users->links() }}
+    <span class="pagination">
+        {{ $users->links('vendor.pagination.custom') }}
+    </span>
 </section>
 </article>
 @endsection

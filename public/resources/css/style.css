@@ -338,7 +338,8 @@ article#comments span.noComments h5 {
 }
 
 article#contact form input[type="submit"],
-article#comments section.writeComment input[type='submit'] {
+article#comments section.writeComment input[type='submit'],
+section.post-operations div a {
     background-color: #262626;
     color: #fff;
     font-size: 1.1em;
@@ -354,7 +355,9 @@ article#comments section.writeComment input[type='submit'] {
 article#contact form input[type="submit"]:hover,
 article#contact form input[type="submit"]:active,
 article#comments section.writeComment input[type='submit']:hover,
-article#comments section.writeComment input[type='submit']:active {
+article#comments section.writeComment input[type='submit']:active,
+section.post-operations div a:hover,
+section.post-operations div a:active {
     background-color: #444;
 }
 
@@ -547,7 +550,7 @@ a.author:hover {
 }
 
 article#comments {
-    margin: 100px auto;
+    margin: 100px auto 50px auto;
     width: 80%;
 }
 
@@ -733,6 +736,25 @@ article.form-container {
     align-items: center;
     background-color: transparent;
 }
+
+section.post-operations {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0px 50px 50px 50px;
+}
+
+section.post-operations div {
+    margin-left: 10px;
+    margin-top: 30px;
+}
+
+section.post-operations div:first-child {
+    margin-left: 0;
+}
+
+section.post-operations div a {}
 
 .loginbox {
     position: absolute;
@@ -1460,6 +1482,35 @@ article.users-list section a:hover {
 
 article.users-list section .unknown {
     color: #666;
+}
+
+article.users-list .pagination {
+    margin-top: 10px;
+}
+
+article.users-list .pagination .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #262626;
+    width: 32px;
+    height: 32px;
+}
+
+article.users-list .pagination .icon.disabled {
+    color: #555;
+}
+
+article.users-list .pagination .arrow i {
+    transform: translateY(-2px);
+}
+
+article.users-list .pagination a {
+    color: #888;
+}
+
+article.users-list .pagination a.active {
+    color: #FFF;
 }
 
 article.account .confirmation {

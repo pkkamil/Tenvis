@@ -21,7 +21,11 @@
                                 <span data-filter="{{$post -> tag -> name}}" class="img-label list">{{$post -> tag -> name}}</span>
                                 <h4>{{$post -> title}}</h4>
                                 <h5>
+                                    @if ($post -> user)
                                     <a href="profile/{{$post -> user -> id}}" class="author">{{$post -> user -> name}}</a>, {{$post -> updated_at->format('d M Y')}}&nbsp;{{$post -> updated_at->format('H:m:s')}}
+                                    @else
+                                    <span class="author">Anonymous</span>, {{$post -> updated_at->format('d M Y')}}&nbsp;{{$post -> updated_at->format('H:m:s')}}
+                                    @endif
                                 </h5>
                             </section>
                         </a>

@@ -12,6 +12,20 @@
 </article>
 <article class="divider second" @if ($post -> divider) style="background: url({{ $post -> divider }}) no-repeat 50% 50%; background-attachment: fixed; background-size: cover;" @endif>></article>
 @include('partials.comments')
+<section class="post-operations">
+    <div data-aos="fade-left" data-aos-once="true">
+        <a href="{{ url()->previous() }}">Back</a>
+    </div>
+    <div data-aos="fade-left" data-aos-delay="500" data-aos-once="true">
+        <a href="{{ url('/blog/post/'.$post -> id.'/report') }}">Report</a>
+    </div>
+    <div data-aos="fade-left" data-aos-delay="800" data-aos-once="true">
+        <a href="{{ url('/blog/post/'.$post -> id.'/edit') }}">Edit</a>
+    </div>
+    <div data-aos="fade-left" data-aos-delay="1100" data-aos-once="true">
+        <a href="{{ url('/blog/post/'.$post -> id.'/delete') }}">Delete</a>
+    </div>
+</section>
 @endsection
 
 
