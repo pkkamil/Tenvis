@@ -30,9 +30,12 @@
             <a href="{{ url('/blog/author/'.$profile -> id) }}">{{ $profile -> name }}'s posts</a>
             </div>
             <div data-aos="fade-left" data-aos-delay="1100">
-                <a href="">Send message</a>
+                <a href="{{ url()->current().'/message' }}">Send message</a>
             </div>
             <div data-aos="fade-left" data-aos-delay="1400">
+                <a href="{{ url()->current().'/report' }}">Report user</a>
+            </div>
+            <div data-aos="fade-left" data-aos-delay="1700">
             <a href="{{ url()->previous() }}">Back</a>
             </div>
         </section>

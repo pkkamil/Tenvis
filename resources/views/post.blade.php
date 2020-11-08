@@ -14,7 +14,7 @@
 @include('partials.comments')
 <section class="post-operations">
     <div data-aos="fade-left" data-aos-once="true">
-        <a href="{{ url()->previous() }}">Back</a>
+        <a href="@if(stristr(url()->previous(), 'edit')) /blog @else{{ url()->previous() }}@endif">Back</a>
     </div>
     <div data-aos="fade-left" data-aos-delay="500" data-aos-once="true">
         <a href="{{ url('/blog/post/'.$post -> id.'/report') }}">Report</a>

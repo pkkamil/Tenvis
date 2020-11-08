@@ -24,6 +24,7 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
     public function index() {
         if (Auth::user()->role == 'Admin') {
             $posts = Post::orderBy('created_at', 'desc')->paginate(4);
@@ -49,5 +50,19 @@ class DashboardController extends Controller
         } else {
             return redirect('/dashboard');
         }
+    }
+
+    public function writersRank() {
+        $writers = User::get()->sortBy(function($q) {
+            return count($q -> posts);
+        });
+        $writers = $writers->reverse();
+        return view('loggedin.writers-rank', compact('writers'));
+    }
+
+    public function searchUser() {
+        $search = $_GET['query'];
+        $users = User::where('name', 'LIKE', '%'.$search.'%')->paginate(100);
+        return view('loggedin.users-list', compact('users', 'search'));
     }
 }

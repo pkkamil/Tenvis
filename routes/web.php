@@ -35,12 +35,15 @@ Route::post('/comments/add', 'PostController@addComment')->name('addComment');
 
 // AUTH
 
+Route::get('/dashboard/notifications', 'NotificationController@index')->name('notifications');
 Route::post('/dashboard/save', 'UserController@saveNote')->name('saveNote');
 Route::get('/dashboard/editor', 'PostController@create')->name('editor');
 Route::post('/dashboard/editor/create', 'PostController@store')->name('createPost');
 Route::post('/dashboard/editor/tag/create', 'TagController@create')->name('newTag');
 Route::get('/dashboard/posts', 'DashboardController@posts')->name('userPosts');
 Route::get('/dashboard/users', 'DashboardController@users')->name('manageUsers');
+Route::get('/dashboard/users/search', 'DashboardController@searchUser')->name('searchUser');
+Route::get('/dashboard/users/rank', 'DashboardController@writersRank')->name('writersRank');
 Route::post('/dashboard/account/edit/save', 'UserController@edit')->name('editAccount');
 Route::post('/profile/edit/save', 'UserController@editUser')->name('editUser');
 Route::post('/blog/post/edit/save', 'PostController@editPost')->name('editPost');
@@ -65,6 +68,8 @@ Route::middleware(['auth', 'verified'])->group(function() {
         }
     });
     Route::view('/dashboard/account', 'loggedin.account')->name('account');
+    Route::view('/dashboard/account/change-password', 'loggedin.change-password');
+    Route::post('/change-password', 'ChangePasswordController@store')->name('change-password');
     Route::view('/dashboard/account/edit', 'loggedin.account-edit');
     Route::view('/dashboard/account/delete', 'loggedin.confirmation');
     Route::post('/dashboard/account/delete/confirm', 'UserController@delete')->name('deleteUser');
@@ -81,3 +86,4 @@ Auth::routes(['verify' => true]);
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('verified');
 
+Route::get('/toast', 'UserController@message');

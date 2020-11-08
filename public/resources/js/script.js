@@ -6,6 +6,12 @@ $(document).ready(function() {
 
 // Scrolling Effect
 
+$(document).ready(function() {
+    if ($(window).scrollTop() > 0) {
+        $("nav").addClass("black")
+    }
+})
+
 $(window).on("scroll", function() {
     if ($(window).scrollTop()) {
         $("nav").addClass("black")

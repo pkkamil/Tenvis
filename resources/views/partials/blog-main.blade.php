@@ -4,7 +4,7 @@
         <h4 class="author-blog">Posts created by {{ $posts[0] -> user -> name }}</h4>
     @endif
     <section class="posts-label">
-        <span data-filter="all" class="list">all</span>
+        <span data-filter="all" class="list active">all</span>
         @foreach ($tags as $category)
     <span data-filter="{{$category -> name}}" class="list">{{$category -> name}}</span>
         @endforeach
@@ -22,10 +22,11 @@
                                 <h4>{{$post -> title}}</h4>
                                 <h5>
                                     @if ($post -> user)
-                                    <a href="profile/{{$post -> user -> id}}" class="author">{{$post -> user -> name}}</a>, {{$post -> updated_at->format('d M Y')}}&nbsp;{{$post -> updated_at->format('H:m:s')}}
+                                    <a href="/profile/{{$post -> user -> id}}" class="author">{{$post -> user -> name}}</a>,
                                     @else
-                                    <span class="author">Anonymous</span>, {{$post -> updated_at->format('d M Y')}}&nbsp;{{$post -> updated_at->format('H:m:s')}}
+                                    <span class="author">Anonymous</span>,
                                     @endif
+                                    {{$post -> updated_at->format('d M Y')}}&nbsp;{{$post -> updated_at->format('H:m:s')}}
                                 </h5>
                             </section>
                         </a>

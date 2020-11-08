@@ -31,6 +31,11 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/95a2d2c3f2.js" crossorigin="anonymous"></script>
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <!-- Toast -->
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js" integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" integrity="sha512-6S2HWzVFxruDlZxI3sXOZZ4/eJ8AcxkQH1+JjSe/ONCEqR9L4Ysq5JdT5ipqtzU7WHalNwzwBv+iE51gNHJNqQ==" crossorigin="anonymous" /> --}}
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
         integrity="sha512-1cK78a1o+ht2JcaW6g8OXYwqpev9+6GqOkz9xmBN9iUUhIndKtxwILGWYOSibOKjLsEdjyjZvYDq/cZwNeak0w=="
@@ -47,7 +52,6 @@
     @if ($filter ?? '')
     <script type="text/javascript" defer src={{ asset("resources/js/filter.js")}}></script>
     @endif
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 </head>
 
 <body @if ($auth ?? '' or $dark ?? '') class="auth" @endif>
@@ -93,4 +97,62 @@ AOS.init({
     });
 </script>
 @endif
+@if ($notification ?? '')
+    <script>
+        let toast = document.createElement('a')
+        toast.classList.add('custom_toast')
+        let href = document.createAttribute('href')
+        href.value = "/dashboard/notifications/"
+        toast.setAttributeNode(href)
+        let titleToast = document.createElement('h3')
+        titleToast.classList.add('toast-title')
+        titleToast.textContent = "{{$notification -> title}}"
+        let bodyToast = document.createElement('p')
+        bodyToast.classList.add('toast-body')
+        bodyToast.textContent = "{{$notification -> message}}"
+        let iconToast = document.createElement('i')
+        iconToast.classList.add('far')
+        iconToast.classList.add('fa-comments')
+        let exitToast = document.createElement('i')
+        exitToast.classList.add('fas')
+        exitToast.classList.add('fa-times')
+        exitToast.classList.add('exit-toast')
+        toast.appendChild(exitToast)
+        toast.appendChild(iconToast)
+        toast.appendChild(titleToast)
+        toast.appendChild(bodyToast)
+        document.body.appendChild(toast)
+
+        $('.exit-toast').click(function(e) {
+            e.preventDefault()
+            $(this).parent().animate({right: '-550px'}, 1000)
+            setTimeout(() => {
+                $(this).parent().remove()
+            }, 1000)
+        })
+    </script>
+@endif
+{{-- <script>
+    @if(Session::has('message'))
+      var type = "{{ Session::get('alert-type', 'info') }}";
+      switch(type){
+          case 'info':
+              toastr.info("{{ Session::get('message') }}");
+              break;
+
+          case 'warning':
+              toastr.warning("{{ Session::get('message') }}");
+              break;
+
+          case 'success':
+              toastr.success("{{ Session::get('message') }}");
+              break;
+
+          case 'error':
+              toastr.error("{{ Session::get('message') }}");
+              break;
+      }
+    @endif
+  </script> --}}
+
 </html>

@@ -32,10 +32,10 @@ class PostController extends Controller
 
     public function find($id) {
         $post = Post::find($id);
-        $author = User::find($post->user_id);
 
-        return view('post', compact('post', 'author'));
+        return view('post', compact('post'));
     }
+
     public function create() {
         if (Auth::user() -> role == 'Reader') {
             return redirect('/dashboard');

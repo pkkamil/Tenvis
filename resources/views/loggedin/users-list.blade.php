@@ -9,7 +9,13 @@
 @section('content')
 <article class="users-list dashboard-part">
     <section>
-    <h2>Users list</h2>
+        <h2>Users list</h2>
+        <section class="users-list-search">
+            <form class="account-settings" action="{{ route('searchUser') }}" method="GET" autocomplete="off">
+            <input type="text" name="query" placeholder="Search user" value="{{ $search ?? '' }}">
+            </form>
+        </section>
+    @if (count($users) > 0)
     <table>
         <tr>
             <th>#</th>
@@ -25,7 +31,7 @@
         </tr>
         @foreach($users as $user)
             <tr>
-                <td data-label="id">{{ $user -> id }}</td>
+                <td data-label="id">{{ $loop -> iteration }}</td>
                 <td data-label="avatar" class="avatar"><img src="{{ $user -> avatar }}" alt=""></td>
                 <td data-label="name">{{ $user -> name }}</td>
                 <td data-label="age" class="age">@if ($user -> age) {{ $user -> age }} @else <span class="unknown">-</span> @endif</td>
@@ -54,6 +60,11 @@
             </tr>
         @endforeach
     </table>
+    @else
+    <section class="no-found-users">
+        There are no users with the given name in the database.
+    </section>
+    @endif
     <span class="pagination">
         {{ $users->links('vendor.pagination.custom') }}
     </span>

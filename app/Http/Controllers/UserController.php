@@ -101,4 +101,13 @@ class UserController extends Controller
         return redirect('/dashboard/users');
     }
 
+    public function message() {
+        $notification = (object)array(
+            'title' => 'New message from Kamil',
+            'message' => 'Hello bro! Can you tell me how to add a post?',
+            'alert-type' => 'message',
+        );
+        return view('home', compact('notification'));
+    }
+
 }

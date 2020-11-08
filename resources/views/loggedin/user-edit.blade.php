@@ -32,6 +32,13 @@
                 <label for="telephone" class="title-tag" @error('telephone') style="color: #a32a14" @enderror>Telephone:</label>
                 <input type="text" name="telephone" id="telephone" value="{{ $user -> telephone }}">
             </span>
+            @if ($errors->all())
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li data-aos='fade-right' data-aos-delay={{400 * $loop->iteration}}>{{ $error }}</li>
+                @endforeach
+            </ul>
+            @endif
         </section>
         <section class="right-part">
             <h2 data-aos="fade-left" data-aos-delay="500" data-aos-once="true">Actions</h2>
@@ -39,7 +46,7 @@
             <button type="submit">Save</button>
             </div>
             <div data-aos="fade-left" data-aos-delay="1100" data-aos-once="true">
-            <a href="{{ url('/dashboard/users') }}">Back</a>
+            <a href="{{ url()->previous() }}">Back</a>
             </div>
         </section>
     </form>
