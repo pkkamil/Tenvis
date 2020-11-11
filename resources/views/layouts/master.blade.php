@@ -97,7 +97,7 @@ AOS.init({
     });
 </script>
 @endif
-@if ($notification ?? '')
+@if (session('notification'))
     <script>
         let toast = document.createElement('a')
         toast.classList.add('custom_toast')
@@ -106,13 +106,19 @@ AOS.init({
         toast.setAttributeNode(href)
         let titleToast = document.createElement('h3')
         titleToast.classList.add('toast-title')
-        titleToast.textContent = "{{$notification -> title}}"
+        titleToast.textContent = "{{session('notification')->title}}"
         let bodyToast = document.createElement('p')
         bodyToast.classList.add('toast-body')
-        bodyToast.textContent = "{{$notification -> message}}"
+        bodyToast.textContent = "{{session('notification')->message}}"
         let iconToast = document.createElement('i')
-        iconToast.classList.add('far')
-        iconToast.classList.add('fa-comments')
+        @if (session('notification')->type == 'message')
+            iconToast.classList.add('far')
+            iconToast.classList.add('fa-comments')
+        @else
+            iconToast.classList.add('fas')
+            iconToast.classList.add('fa-info-circle')
+        @endif
+        iconToast.classList.add('icon')
         let exitToast = document.createElement('i')
         exitToast.classList.add('fas')
         exitToast.classList.add('fa-times')
@@ -123,6 +129,10 @@ AOS.init({
         toast.appendChild(bodyToast)
         document.body.appendChild(toast)
 
+        setTimeout(() => {
+            $('.exit-toast').click()
+        }, 5000)
+
         $('.exit-toast').click(function(e) {
             e.preventDefault()
             $(this).parent().animate({right: '-550px'}, 1000)
@@ -132,27 +142,4 @@ AOS.init({
         })
     </script>
 @endif
-{{-- <script>
-    @if(Session::has('message'))
-      var type = "{{ Session::get('alert-type', 'info') }}";
-      switch(type){
-          case 'info':
-              toastr.info("{{ Session::get('message') }}");
-              break;
-
-          case 'warning':
-              toastr.warning("{{ Session::get('message') }}");
-              break;
-
-          case 'success':
-              toastr.success("{{ Session::get('message') }}");
-              break;
-
-          case 'error':
-              toastr.error("{{ Session::get('message') }}");
-              break;
-      }
-    @endif
-  </script> --}}
-
 </html>

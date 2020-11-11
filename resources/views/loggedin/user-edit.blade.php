@@ -7,7 +7,7 @@
 
 @extends('layouts.master')
 @section('content')
-<article class="account dashboard-part">
+<article class="account dashboard-part lrpart">
     <form class="account-settings" action="{{ route('editUser') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="profileId" value={{ $user -> id }}>

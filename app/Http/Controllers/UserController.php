@@ -92,7 +92,7 @@ class UserController extends Controller
     }
 
     public function delete() {
-        Auth::user()->delete();
+        Auth::destroy();
         return redirect('/');
     }
 
@@ -101,13 +101,15 @@ class UserController extends Controller
         return redirect('/dashboard/users');
     }
 
-    public function message() {
-        $notification = (object)array(
-            'title' => 'New message from Kamil',
-            'message' => 'Hello bro! Can you tell me how to add a post?',
-            'alert-type' => 'message',
-        );
-        return view('home', compact('notification'));
+    public function message($notification = null) {
+        if ($notification == null) {
+            $notification = (object)array(
+                'title' => 'New message from Kamil',
+                'message' => 'Hello bro! Can you tell me how to add a post?',
+                'type' => 'message',
+            );
+        }
+        return redirect('/')->with('notification', $notification);
     }
 
 }

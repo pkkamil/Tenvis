@@ -29,17 +29,21 @@ Route::get('/login', function () {
 
 Route::get('/blog', 'PostController@index');
 Route::get('/blog/post/{id}', 'PostController@find');
-Route::get('/profile/{profileId}', 'UserController@index');
+Route::get('/profile/{profileId}', 'UserController@index')->name('profile');
 Route::get('/blog/author/{profileId}', 'PostController@authorPosts');
 Route::post('/comments/add', 'PostController@addComment')->name('addComment');
 
 // AUTH
 
 Route::get('/dashboard/notifications', 'NotificationController@index')->name('notifications');
+Route::get('/dashboard/notifications/{id}/toggle', 'NotificationController@toggleStatus');
+Route::get('/dashboard/notifications/{id}/delete', 'NotificationController@destroy');
+Route::get('/dashboard/notifications/{id}', 'NotificationController@show');
 Route::post('/dashboard/save', 'UserController@saveNote')->name('saveNote');
 Route::get('/dashboard/editor', 'PostController@create')->name('editor');
 Route::post('/dashboard/editor/create', 'PostController@store')->name('createPost');
 Route::post('/dashboard/editor/tag/create', 'TagController@create')->name('newTag');
+Route::get('/dashboard/reports', 'DashboardController@reports')->name('reports');
 Route::get('/dashboard/posts', 'DashboardController@posts')->name('userPosts');
 Route::get('/dashboard/users', 'DashboardController@users')->name('manageUsers');
 Route::get('/dashboard/users/search', 'DashboardController@searchUser')->name('searchUser');
@@ -50,7 +54,7 @@ Route::post('/blog/post/edit/save', 'PostController@editPost')->name('editPost')
 
 Route::middleware(['auth', 'verified'])->group(function() {
     Route::get('/blog/post/{postId}/edit', function($postId) {
-        if (Auth:: user() -> role == 'Admin') {
+        if (Auth::user() -> role == 'Admin') {
             $post = Post::find($postId);
             $tags = Tag::all();
             return view('loggedin.post-edit', compact('post', 'tags'));
@@ -60,13 +64,15 @@ Route::middleware(['auth', 'verified'])->group(function() {
     });
     Route::get('/profile/{profileId}/edit', 'UserController@editOtherUser');
     Route::get('/profile/{profileId}/delete', function($profileId) {
-        if (Auth:: user() -> role == 'Admin') {
+        if (Auth::user() -> role == 'Admin') {
             $user = User::find($profileId);
             return view('loggedin.user-delete', compact('user'));
         } else {
             return view('account');
         }
     });
+    Route::get('/profile/{profileId}/message', 'NotificationController@create');
+    Route::post('/send-message', 'NotificationController@store')->name('send');
     Route::view('/dashboard/account', 'loggedin.account')->name('account');
     Route::view('/dashboard/account/change-password', 'loggedin.change-password');
     Route::post('/change-password', 'ChangePasswordController@store')->name('change-password');
@@ -84,6 +90,8 @@ Route::middleware(['auth', 'verified'])->group(function() {
 
 Auth::routes(['verify' => true]);
 
+
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('verified');
 
 Route::get('/toast', 'UserController@message');
+

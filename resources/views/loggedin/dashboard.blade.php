@@ -10,7 +10,9 @@
 <article class="activity-center dashboard-part  @if (count($posts) > 0)founded @endif">
     <section class="user-section">
         <img data-aos='fade-right' src="{{ Auth::user() -> avatar }}" alt="">
-        <a href="{{ route('notifications') }}"><i class="fas fa-bell @if (Auth::user() -> notifications)@foreach(Auth::user() -> notifications as $n)@if($n -> unread == 1)unread @break @endif @endforeach @endif"></i></a>
+        <div class="bell" data-aos="fade=right" data-aos-delay="800">
+            <a href="{{ route('notifications') }}"><i class="fas fa-bell @if (Auth::user() -> notifications)@foreach(Auth::user() -> notifications as $n)@if($n -> unread == 1)unread @break @endif @endforeach @endif"></i></a>
+        </div>
         <h2 data-aos='fade-right' data-aos-delay='400'>Hello, {{ Auth::user() -> name }}!</h2>
         <h3 data-aos='fade-right' data-aos-delay='800'>Below is your personal notebook.</h3>
         <form action="{{ route('saveNote') }}" method="POST">

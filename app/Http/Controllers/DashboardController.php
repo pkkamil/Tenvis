@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Post;
 use App\User;
 use App\Tag;
+use App\Report;
 
 class DashboardController extends Controller
 {
@@ -16,7 +17,7 @@ class DashboardController extends Controller
      * @return void
      */
     public function __construct() {
-        $this->middleware(['auth', 'verified']);
+        $this->middleware(['auth', 'verified', 'check.notifications']);
     }
 
     /**
@@ -64,5 +65,10 @@ class DashboardController extends Controller
         $search = $_GET['query'];
         $users = User::where('name', 'LIKE', '%'.$search.'%')->paginate(100);
         return view('loggedin.users-list', compact('users', 'search'));
+    }
+
+    public function reports() {
+        $reports = Report::paginate(5);
+        return view('loggedin.reports', compact('reports'));
     }
 }

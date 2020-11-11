@@ -7,7 +7,7 @@
 
 @extends('layouts.master')
 @section('content')
-<article class="account dashboard-part">
+<article class="account dashboard-part lrpart">
     <form class="account-settings" action="{{ route('editAccount') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
         @csrf
         <section class="left-part">

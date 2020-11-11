@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,8 +15,19 @@ class NotificationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $notifications = Auth::user() -> notifications;
+        $notifications = Notification::where('user_id', Auth::id()) -> paginate(5);
         return view('loggedin.notifications', compact('notifications'));
+    }
+
+    public function toggleStatus($id) {
+        $notification = Notification::find($id);
+        if ($notification -> unread) {
+            $notification -> unread = 0;
+        } else {
+            $notification -> unread = 1;
+        }
+        $notification -> save();
+        return redirect(url()->previous());
     }
 
     /**
@@ -23,8 +35,9 @@ class NotificationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
-        //
+    public function create($profileId) {
+        $user = User::find($profileId);
+        return view('loggedin.send-message', compact('user'));
     }
 
     /**
@@ -33,9 +46,24 @@ class NotificationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $req) {
+        $req->validate([
+            'message' => 'required|string|max:1000',
+        ]);
+        $notifi = new Notification;
+        $notifi -> title = 'New message from '.Auth::user() -> name;
+        $notifi -> message = $req -> message;
+        $notifi -> sender = Auth::id();
+        $notifi -> user_id = $req -> profileId;
+        $notifi -> save();
+
+        $notification = (object)array(
+            'title' => 'Your message has been sent',
+            'message' => 'View your inbox',
+            'type' => 'message',
+        );
+
+        return redirect('/profile/'.$req -> profileId)->with('notification', $notification);
     }
 
     /**
@@ -44,9 +72,9 @@ class NotificationController extends Controller
      * @param  \App\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function show(Notification $notification)
-    {
-        //
+    public function show($id) {
+        $singleMessage = Notification::find($id);
+        return view('loggedin.single-message', compact('singleMessage'));
     }
 
     /**
@@ -78,8 +106,8 @@ class NotificationController extends Controller
      * @param  \App\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Notification $notification)
-    {
-        //
+    public function destroy($id) {
+        Notification::destroy($id);
+        return redirect('/dashboard/notifications');
     }
 }

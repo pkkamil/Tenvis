@@ -7,7 +7,7 @@
 
 @extends('layouts.master')
 @section('content')
-<article class="account dashboard-part">
+<article class="account dashboard-part lrpart">
     <section class="account-settings">
         <section class="left-part">
             <img src="{{ Auth::user() -> avatar }}" alt="" data-aos="fade-right" data-aos-once="true">
@@ -38,6 +38,14 @@
             <div class="danger" data-aos="fade-left" data-aos-delay="2100" data-aos-once="true">
             <a href="{{ url('/dashboard/account/delete') }}">Delete account</a>
             </div>
+            @if (Auth::user() -> role == 'Admin')
+            <div data-aos="fade-left" data-aos-delay="2400" data-aos-once="true">
+                <a href="{{ url('/dashboard/posts/') }}">All Posts</a>
+            </div>
+            <div data-aos="fade-left" data-aos-delay="2700" data-aos-once="true">
+                <a href="{{ url('/dashboard/reports/') }}">Reports</a>
+            </div>
+            @endif
         </section>
     </section>
 </article>

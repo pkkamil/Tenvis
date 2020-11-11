@@ -19,12 +19,14 @@
     <div data-aos="fade-left" data-aos-delay="500" data-aos-once="true">
         <a href="{{ url('/blog/post/'.$post -> id.'/report') }}">Report</a>
     </div>
+    @if (Auth::user() and Auth::user() -> role == 'Admin')
     <div data-aos="fade-left" data-aos-delay="800" data-aos-once="true">
         <a href="{{ url('/blog/post/'.$post -> id.'/edit') }}">Edit</a>
     </div>
     <div data-aos="fade-left" data-aos-delay="1100" data-aos-once="true">
         <a href="{{ url('/blog/post/'.$post -> id.'/delete') }}">Delete</a>
     </div>
+    @endif
 </section>
 @endsection
 

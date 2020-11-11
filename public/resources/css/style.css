@@ -9,6 +9,7 @@ ul *) {
 body {
     font-family: "Helvetica Neue", sans-serif;
     font-size: 18px;
+    overflow-x: hidden;
 }
 
 .loader-container {
@@ -69,21 +70,23 @@ a:hover {
     font-family: "Epilogue", sans-serif;
     background-color: rgba(255, 255, 255, .8);
     padding: 20px 30px;
+    width: 100%;
     border: 1px solid #ddd;
     transition: .6s background-color;
 }
 
-.custom_toast i.far {
+.custom_toast i.icon {
     font-size: 1.4em;
     transform: translateY(2px);
     color: #333;
 }
 
-.custom_toast i.fas {
+.custom_toast i.exit-toast {
     position: absolute;
-    top: 15px;
-    right: 20px;
+    top: 10px;
+    right: 15px;
     font-size: .7em;
+    padding: 5px;
     color: #262626;
 }
 
@@ -92,7 +95,7 @@ a:hover {
     font-size: .8em;
     font-weight: bold;
     text-transform: uppercase;
-    margin-left: 20px;
+    margin-left: 15px;
     display: inline-block;
 }
 
@@ -960,7 +963,7 @@ article.notifications {
     background: url("/resources/img/bg-notifications.jpg") no-repeat 50% 50%;
     background-size: cover;
     background-attachment: fixed;
-    padding: 200px 100px;
+    padding: 130px 100px;
     font-family: "Epilogue", sans-serif;
 }
 
@@ -1013,20 +1016,24 @@ article.activity-center section.user-section img,
     object-fit: cover;
 }
 
-article.activity-center section.user-section i {
+article.activity-center section.user-section div.bell {
+    display: inline-block;
     margin-left: 5px;
     position: absolute;
+}
+
+article.activity-center section.user-section div.bell i {
     font-size: 1.3em;
     transition: .6s color;
     color: #262626;
 }
 
-article.activity-center section.user-section i.unread {
+article.activity-center section.user-section div.bell i.unread {
     color: #555;
     animation: infinite 2s vibrant ease-in-out;
 }
 
-article.activity-center section.user-section i:hover {
+article.activity-center section.user-section div.bell i:hover {
     cursor: pointer;
     color: #777;
 }
@@ -1077,7 +1084,8 @@ article.account div a,
 article.account div button,
 article.account .confirmation button,
 article.account .confirmation a,
-article.users-list section div a {
+article.users-list section div a.back,
+article.notifications.sm section.right-part a {
     display: block;
     margin: 10px auto;
     font-size: 1.2em;
@@ -1104,7 +1112,8 @@ article.editor form button:hover,
 article.account div a:hover,
 article.account div button:hover,
 article.account .confirmation a:hover,
-article.users-list section div a:hover {
+article.users-list section div.back a:hover,
+article.notifications.sm section.right-part a:hover {
     background-color: #fff;
     color: #262626;
 }
@@ -1215,6 +1224,121 @@ article.activity-center div.emptyPosts h3 {
 
 article.activity-center div.emptyPosts h4 {
     font-size: 1.1em;
+}
+
+article.notifications section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+article.notifications section h2.title {
+    text-transform: uppercase;
+    font-family: "Epilogue", sans-serif;
+    margin-bottom: 50px;
+    text-shadow: 0px 0px 5px #262626;
+}
+
+article.notifications section a.single-message {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    padding: 30px 40px;
+    background-color: rgba(38, 38, 38, .7);
+    margin-bottom: 20px;
+    transition: .6s transform;
+}
+
+article.notifications section a.single-message.unread {
+    background-color: rgba(68, 68, 68, .7);
+}
+
+article.notifications section a.single-message:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+}
+
+article.notifications section a.single-message img {
+    width: 48px;
+    height: 48px;
+    border-radius: 0;
+}
+
+article.notifications section a.single-message span.content {
+    margin-left: 30px;
+    width: 90%;
+}
+
+article.notifications section a.single-message span.content h3 {
+    text-transform: uppercase;
+    font-size: 1em;
+    margin-bottom: 0;
+}
+
+article.notifications section a.single-message span.content p {
+    color: #bbb;
+    margin-top: 5px;
+    font-size: .9em;
+    max-width: 90%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-bottom: 0;
+}
+
+article.notifications section a.single-message span.actions {
+    position: absolute;
+    right: 0;
+    margin-right: 40px;
+}
+
+article.notifications section a.single-message span.actions i {
+    padding: 10px 6px;
+    color: #fff;
+    transition: .6s color;
+}
+
+article.notifications section a.single-message span.actions i:hover {
+    color: #aaa;
+}
+
+article.notifications.sm section.left-part img {
+    width: 96px;
+    height: 96px;
+    border-radius: 0;
+    margin-bottom: 20px;
+}
+
+article.notifications.sm section.left-part h2 {
+    margin-bottom: 0;
+}
+
+article.notifications.sm section.left-part h3.from {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+}
+
+article.notifications.sm section.left-part a {
+    color: #bbb;
+    transition: .6s color;
+}
+
+article.notifications.sm section.left-part a:hover {
+    color: #999;
+}
+
+article.notifications.sm section.left-part p {
+    padding: 20px 40px;
+    background-color: rgba(38, 38, 38, .7);
+}
+
+article.notifications.sm section.right-part a {
+    width: 150px;
+    text-align: center;
 }
 
 article.editor h2 {
@@ -1525,7 +1649,8 @@ article.account .account-settings section.left-part label {
     font-size: 1.5em;
 }
 
-article.users-list section {
+article.users-list section,
+article.notifications section {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1533,6 +1658,10 @@ article.users-list section {
     color: #FFF;
     margin: 0 auto;
     width: 100%;
+}
+
+.back {
+    margin-top: 20px;
 }
 
 article.users-list section.users-list-search {
@@ -1612,11 +1741,11 @@ article.users-list section .unknown {
     color: #666;
 }
 
-article.users-list .pagination {
+.pagination {
     margin-top: 10px;
 }
 
-article.users-list .pagination .icon {
+.pagination .icon {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1625,19 +1754,27 @@ article.users-list .pagination .icon {
     height: 32px;
 }
 
-article.users-list .pagination .icon.disabled {
+.pagination .icon.disabled {
     color: #555;
 }
 
-article.users-list .pagination .arrow i {
+.pagination .icon.disabled:hover {
+    color: #555;
+}
+
+.pagination .icon:not(.disabled):hover {
+    color: #fff;
+}
+
+.pagination .arrow i {
     transform: translateY(-2px);
 }
 
-article.users-list .pagination a {
+.pagination a {
     color: #888;
 }
 
-article.users-list .pagination a.active {
+.pagination a.active {
     color: #FFF;
 }
 
@@ -1664,6 +1801,57 @@ article.account .confirmation button {
 article.account .confirmation button {
     margin-left: 10px;
     transition: .6s color, .6s background-color, .6s border-color;
+}
+
+article.account .sending-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+article.account .sending-message h2 {
+    text-transform: uppercase;
+    color: #FFF;
+    margin-bottom: 0px;
+}
+
+article.account .sending-message h3 {
+    text-transform: uppercase;
+    font-size: 1.1em;
+    color: #ddd;
+    margin-bottom: 20px;
+}
+
+article.account .sending-message form label {
+    text-align: center;
+    font-size: 1.3em;
+    color: #FFF;
+    text-transform: uppercase;
+    display: block;
+}
+
+article.account .sending-message form textarea {
+    width: 840px;
+    height: 360px;
+    padding: 15px 20px;
+    font-size: 1em;
+    resize: none;
+    background-color: transparent;
+    outline: none;
+    color: #fff;
+    border: 1px solid #ddd;
+}
+
+article.account .sending-message form section.operations {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+article.account .sending-message form section.operations div:first-child {
+    margin-right: 20px;
 }
 
 
@@ -1895,6 +2083,9 @@ footer .description {
         text-align: center!important;
         margin-top: 50px;
     }
+    article.notifications section a.single-message span.content {
+        width: 80%;
+    }
 }
 
 @media(max-width: 1100px) {
@@ -2029,6 +2220,9 @@ footer .description {
     article.users-list section.users-list-search input {
         margin-right: 10px;
     }
+    article.notifications section a.single-message span.content p {
+        max-width: 80%;
+    }
 }
 
 @media (max-width: 786px) {
@@ -2093,6 +2287,9 @@ footer .description {
     article.users-list section table td {
         padding: 10px;
     }
+    article.notifications {
+        padding: 130px 50px;
+    }
 }
 
 @media (max-width: 700px) {
@@ -2141,6 +2338,15 @@ footer .description {
         margin-top: 30px;
         text-align: center;
         padding: 0 20px;
+    }
+    article.notifications {
+        font-size: 15px;
+    }
+    article.notifications section a.single-message {
+        padding: 15px 20px;
+    }
+    article.notifications section a.single-message span.content {
+        margin-left: 20px;
     }
 }
 
@@ -2191,6 +2397,15 @@ footer .description {
     }
     article.account h4 span.bk {
         display: block;
+    }
+    article.notifications section a.single-message span.content {
+        margin-bottom: 30px;
+    }
+    article.notifications section a.single-message span.content p {
+        display: none;
+    }
+    article.notifications section a.single-message span.actions {
+        bottom: 10%;
     }
 }
 
@@ -2281,6 +2496,13 @@ footer .description {
     }
     article.account form.account-settings span input#email {
         width: 270px;
+    }
+    article.notifications {
+        padding: 130px 20px;
+        font-size: 14px;
+    }
+    article.notifications section a.single-message {
+        margin-bottom: 10px;
     }
 }
 

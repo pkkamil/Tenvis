@@ -7,7 +7,7 @@
 
 @extends('layouts.master')
 @section('content')
-<article class="account dashboard-part">
+<article class="account dashboard-part lrpart">
     <section class="account-settings">
         <section class="left-part">
             <img src="{{ $profile -> avatar }}" alt="" data-aos="fade-right">
@@ -21,7 +21,7 @@
         </section>
         <section class="right-part">
             <h2 data-aos="fade-left" data-aos-delay="500">Actions</h2>
-            @if (Auth::user() -> role == 'Admin')
+            @if (Auth::user() and Auth::user() -> role == 'Admin')
             <div data-aos="fade-left" data-aos-delay="600">
                 <a href="{{ url('/profile/'.$profile -> id.'/edit') }}">Edit user</a>
             </div>

@@ -15,7 +15,7 @@ class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'verified'])->except('index', 'find');
+        $this->middleware(['auth', 'verified'])->except('index', 'find', 'authorPosts');
     }
 
     public function index() {
@@ -125,5 +125,9 @@ class PostController extends Controller
         $comment -> content = $req -> message;
         $comment -> save();
         return redirect('/blog/post/'.$req -> post_id);
+    }
+
+    public function destroy($id) {
+        Post::destroy($id);
     }
 }

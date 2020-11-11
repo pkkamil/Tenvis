@@ -20,4 +20,8 @@ class TagController extends Controller
         $tag -> save();
         return redirect(url() -> previous());
     }
+
+    public function destroy($id) {
+        Tag::destroy($id);
+    }
 }

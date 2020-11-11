@@ -7,7 +7,7 @@
 
 @extends('layouts.master')
 @section('content')
-<article class="account dashboard-part change-password">
+<article class="account dashboard-part change-password lrpart">
     <form class="account-settings" method="POST" action="{{ route('change-password') }}">
         <section class="left-part">
             @csrf

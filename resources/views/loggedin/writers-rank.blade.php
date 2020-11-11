@@ -45,7 +45,7 @@
             @endforeach
         </table>
         <div class="back" data-aos="fade-up" data-aos-once="true">
-            <a href="{{ url()->previous() }}">Back</a>
+            <a class="back" href="{{ url('/dashboard/account') }}">Back</a>
         </div>
         {{-- <span class="pagination">
             {{ $writers->links('vendor.pagination.custom') }}
