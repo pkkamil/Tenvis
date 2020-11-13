@@ -808,8 +808,6 @@ section.post-operations div:first-child {
     margin-left: 0;
 }
 
-section.post-operations div a {}
-
 .loginbox {
     position: absolute;
     width: 320px;
@@ -1050,6 +1048,16 @@ article.activity-center section.user-section div.bell i:hover {
     }
 }
 
+article.delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+article.delete section:first-child {
+    transform: translateY(-96px);
+}
+
 article.activity-center section.user-section h2 {
     font-size: 1.5em;
     margin-top: 10px;
@@ -1085,7 +1093,8 @@ article.account div button,
 article.account .confirmation button,
 article.account .confirmation a,
 article.users-list section div a.back,
-article.notifications.sm section.right-part a {
+article.notifications.sm section.right-part a,
+article.users-list section.report section.operations a {
     display: block;
     margin: 10px auto;
     font-size: 1.2em;
@@ -1113,7 +1122,8 @@ article.account div a:hover,
 article.account div button:hover,
 article.account .confirmation a:hover,
 article.users-list section div.back a:hover,
-article.notifications.sm section.right-part a:hover {
+article.notifications.sm section.right-part a:hover,
+article.users-list section.report section.operations a:hover {
     background-color: #fff;
     color: #262626;
 }
@@ -1594,7 +1604,8 @@ article.account .account-settings section.right-part div button {
 }
 
 article.account .account-settings section.right-part div.danger a:hover,
-article.account .confirmation button:hover {
+article.account .confirmation button.danger:hover,
+article.users-list section.report section.operations a.danger:hover {
     color: #FFF;
     background-color: #d62f05;
     border-color: #d62f05;
@@ -1662,6 +1673,35 @@ article.notifications section {
 
 .back {
     margin-top: 20px;
+}
+
+article.users-list h2.report-title {
+    margin-bottom: 40px;
+}
+
+article.users-list section.report h2.report-title {
+    margin-bottom: 5px;
+}
+
+article.users-list section.report h3.small {
+    font-size: 1.2em;
+    margin-bottom: 0px;
+    text-align: center;
+}
+
+article.users-list section.report h3.content {
+    font-size: 1.4em;
+    margin-top: 30px;
+    margin-bottom: 5px;
+}
+
+article.users-list section.report h3.added_at {
+    margin-top: 15px;
+    font-size: 1.2em;
+}
+
+article.users-list section.report h3 span.marked {
+    color: #aaa;
 }
 
 article.users-list section.users-list-search {
@@ -1789,11 +1829,32 @@ article.account .confirmation h2 {
     color: #FFF;
     text-transform: uppercase;
     margin-top: 20px;
+    margin-bottom: 10px;
+    padding: 0 20px;
+    text-align: center;
     font-size: 1.5em;
+    text-shadow: 0px 0px 5px #262626;
+}
+
+article.account .confirmation h2.report-title {
+    margin-bottom: 20px;
+}
+
+article.account .confirmation form.report textarea {
+    height: 250px;
+}
+
+article.account .confirmation h3 {
+    color: #DDD;
+    font-size: 1.4em;
+    padding: 0 20px;
+    text-transform: uppercase;
+    text-shadow: 0px 0px 5px #262626;
 }
 
 article.account .confirmation a,
-article.account .confirmation button {
+article.account .confirmation button,
+article.account .confirmation div {
     text-align: center;
     display: inline-block;
 }
@@ -1843,14 +1904,16 @@ article.account .sending-message form textarea {
     border: 1px solid #ddd;
 }
 
-article.account .sending-message form section.operations {
+article.account .sending-message form section.operations,
+article.users-list section.report section.operations {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
-article.account .sending-message form section.operations div:first-child {
+article.account .sending-message form section.operations div:first-child,
+article.users-list section.report section.operations div:first-child {
     margin-right: 20px;
 }
 
@@ -2029,7 +2092,8 @@ footer .description {
         transform: translateY(0);
     }
     article.users-list .telephone,
-    article.users-list .age {
+    article.users-list .age,
+    article.users-list .claimant_name {
         display: none;
     }
 }
@@ -2089,7 +2153,8 @@ footer .description {
 }
 
 @media(max-width: 1100px) {
-    article.users-list .avatar {
+    article.users-list .avatar,
+    article.users-list .image {
         display: none;
     }
 }
@@ -2131,6 +2196,16 @@ footer .description {
     }
     article.users-list section table td {
         padding: 10px 15px;
+    }
+    article.account .confirmation {
+        width: 100%;
+    }
+    article.account .confirmation form {
+        text-align: center;
+        width: 100%;
+    }
+    article.account .confirmation form textarea {
+        width: 90%;
     }
 }
 
@@ -2290,6 +2365,9 @@ footer .description {
     article.notifications {
         padding: 130px 50px;
     }
+    article.users-list .added_at {
+        display: none;
+    }
 }
 
 @media (max-width: 700px) {
@@ -2309,7 +2387,9 @@ footer .description {
     article.users-list table tr td.avatar,
     article.users-list table tr td.age,
     article.users-list table tr td.telephone,
-    article.users-list table tr td.verified {
+    article.users-list table tr td.verified,
+    article.users-list table tr td.image,
+    article.users-list table tr td.claimant_name {
         display: block;
     }
     article.users-list table tr,
@@ -2504,6 +2584,9 @@ footer .description {
     article.notifications section a.single-message {
         margin-bottom: 10px;
     }
+    article.account section.confirmation img.avatar-img {
+        display: none;
+    }
 }
 
 @media (max-width: 450px) {
@@ -2582,6 +2665,12 @@ footer .description {
     .showing {
         border-bottom: 1px solid #999;
     }
+    article.delete section:first-child {
+        transform: translateY(0);
+    }
+    section.post-operations {
+        padding: 0px 20px 40px 20px;
+    }
 }
 
 @media (max-width: 400px) {
@@ -2599,6 +2688,9 @@ footer .description {
 @media (max-width: 400px) and (max-height: 820px) {
     article.activity-center {
         padding: 40px 20px;
+    }
+    article.delete section {
+        transform: translateY(-10px)
     }
 }
 

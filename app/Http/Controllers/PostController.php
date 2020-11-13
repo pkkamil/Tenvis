@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\User;
 use App\Tag;
+use App\Report;
 use App\Comment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -129,5 +130,19 @@ class PostController extends Controller
 
     public function destroy($id) {
         Post::destroy($id);
+        return redirect('/blog');
+    }
+
+    public function report(Request $req) {
+        $req->validate([
+            'report' => 'required|max:500|string',
+        ]);
+        $report = new Report();
+        $report -> type = "Post";
+        $report -> object_id = $req -> postId;
+        $report -> user_id = Auth::id();
+        $report -> content = $req -> report;
+        $report -> save();
+        return redirect('/blog/post/'.$req -> postId);
     }
 }

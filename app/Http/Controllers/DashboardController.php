@@ -68,7 +68,7 @@ class DashboardController extends Controller
     }
 
     public function reports() {
-        $reports = Report::paginate(5);
+        $reports = Report::paginate(10);
         return view('loggedin.reports', compact('reports'));
     }
 }

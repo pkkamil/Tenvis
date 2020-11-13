@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Report;
 use App\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -63,7 +64,7 @@ class UserController extends Controller
 
     public function editOtherUser($profileId) {
         $user = User::find($profileId);
-        return view('loggedin.user-edit', compact('user'));
+        return view('loggedin.edit-user', compact('user'));
     }
 
     public function editUser(Request $req) {
@@ -79,7 +80,9 @@ class UserController extends Controller
         $user -> name = $req -> name;
         $user -> email = $req -> email;
         $user -> age = $req -> age;
-        $user -> telephone = $req -> telephone;
+        if ($req -> telephone != null) {
+            $user -> telephone = $req -> telephone;
+        }
         if($req -> avatar != null) {
             $img_name = Str::random(30);
             $extension = $req -> avatar -> extension();
@@ -112,4 +115,16 @@ class UserController extends Controller
         return redirect('/')->with('notification', $notification);
     }
 
+    public function report(Request $req) {
+        $req->validate([
+            'report' => 'required|max:500|string',
+        ]);
+        $report = new Report();
+        $report -> type = "User";
+        $report -> object_id = $req -> userId;
+        $report -> user_id = Auth::id();
+        $report -> content = $req -> report;
+        $report -> save();
+        return redirect('/profile/'.$req -> userId);
+    }
 }

@@ -14,7 +14,7 @@
         <form action="{{ route('deleteUser') }}" method="POST">
             @csrf
             <a href="{{ route('account') }}">Back</a>
-            <button type="submit">Delete</button>
+            <button class="danger" type="submit">Delete</button>
         </form>
     </section>
 </article>
