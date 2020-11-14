@@ -34,12 +34,21 @@ Route::get('/blog/post/{id}/delete/confirmation', 'PostController@destroy');
 Route::get('/profile/{profileId}', 'UserController@index')->name('profile');
 Route::get('/blog/author/{profileId}', 'PostController@authorPosts');
 Route::post('/comments/add', 'PostController@addComment')->name('addComment');
+Route::get('/comments/{id}/delete', function($id) {
+    $comment = App\Comment::find($id);
+    if (Auth::id() == $comment -> user_id or Auth::id() == $comment -> post -> user_id or Auth::user() -> role == 'Admin') {
+        App\Comment::destroy($id);
+    }
+    return back();
+});
 
 // AUTH
 
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::get('/dashboard/notifications', 'NotificationController@index')->name('notifications');
 Route::get('/dashboard/notifications/{id}/toggle', 'NotificationController@toggleStatus');
 Route::get('/dashboard/notifications/{id}/delete', 'NotificationController@destroy');
+Route::get('/dashboard/writer/request', 'MailController@writerRequest')->name('writer-request');
 Route::get('/dashboard/notifications/{id}', 'NotificationController@show');
 Route::post('/dashboard/save', 'UserController@saveNote')->name('saveNote');
 Route::get('/dashboard/editor', 'PostController@create')->name('editor');
@@ -64,8 +73,8 @@ Route::post('/blog/post/edit/save', 'PostController@editPost')->name('editPost')
 
 Route::middleware(['auth', 'verified'])->group(function() {
     Route::get('/blog/post/{postId}/edit', function($postId) {
-        if (Auth::user() -> role == 'Admin') {
-            $post = Post::find($postId);
+        $post = Post::find($postId);
+        if (Auth::user() -> role == 'Admin' or Auth::id() == $post -> user_id) {
             $tags = Tag::all();
             return view('loggedin.edit-post', compact('post', 'tags'));
         } else {
@@ -73,8 +82,8 @@ Route::middleware(['auth', 'verified'])->group(function() {
         }
     });
     Route::get('/blog/post/{id}/delete', function($id) {
-        if (Auth::user() -> role == 'Admin') {
-            $post = Post::find($id);
+        $post = Post::find($id);
+        if (Auth::user() -> role == 'Admin' or Auth::id() == $post -> user_id) {
             return view('loggedin.delete-post', compact('post'));
         } else {
             return redirect('/blog/post/'.$id);
@@ -111,16 +120,6 @@ Route::middleware(['auth', 'verified'])->group(function() {
     Route::post('/profile/delete/confirm', 'UserController@deleteOtherUser')->name('deleteOtherUser');
 });
 
-
-// Route::get('/blog/post/{id}', function ($id) {
-//     return view('post', compact('id'));
-// });
-
-
 Auth::routes(['verify' => true]);
-
-
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('verified');
-
 Route::get('/toast', 'UserController@message');
 

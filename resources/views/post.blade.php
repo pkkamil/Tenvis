@@ -19,7 +19,7 @@
     <div data-aos="fade-left" data-aos-delay="500" data-aos-once="true">
         <a href="{{ url('/blog/post/'.$post -> id.'/report') }}">Report</a>
     </div>
-    @if (Auth::user() and Auth::user() -> role == 'Admin')
+    @if (Auth::user() and Auth::user() -> role == 'Admin' or Auth::id() == $post -> user_id)
     <div data-aos="fade-left" data-aos-delay="800" data-aos-once="true">
         <a href="{{ url('/blog/post/'.$post -> id.'/edit') }}">Edit</a>
     </div>

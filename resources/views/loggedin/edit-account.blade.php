@@ -31,6 +31,16 @@
                 <label for="telephone" class="title-tag" @error('telephone') style="color: #a32a14" @enderror>Telephone:</label>
                 <input type="text" name="telephone" id="telephone" value="{{ Auth::user() -> telephone }}">
             </span>
+            @if (Auth::user() -> role == 'Admin')
+            <span class="Role" data-aos="fade-right" data-aos-delay="1700" data-aos-once="true">
+                <label for="Role" class="title-tag" @error('Role') style="color: #a32a14" @enderror>Role:</label>
+                <select name="role" id="role">
+                    <option value="Admin" @if (Auth::user() -> role == 'Admin')selected @endif>Admin</option>
+                    <option value="Writer" @if (Auth::user() -> role == 'Writer')selected @endif>Writer</option>
+                    <option value="Reader" @if (Auth::user() -> role == 'Reader')selected @endif>Reader</option>
+                </select>
+            </span>
+            @endif
             @if ($errors->all())
             <ul>
                 @foreach ($errors->all() as $error)

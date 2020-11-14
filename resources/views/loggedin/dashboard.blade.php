@@ -80,7 +80,11 @@
                         <h4>To create your own posts you need to send a request to us.</h4>
                     </div>
                     <div data-aos="fade-up" data-aos-delay="800">
-                        <a href="{{ route('editor') }}">Send request</a>
+                        @if (Auth::user() -> request_writer)
+                        <a class="disabled" href="{{ route('writer-request') }}">Sended request</a>
+                        @else
+                        <a href="{{ route('writer-request') }}">Send request</a>
+                        @endif
                     </div>
                 @endif
             </div>

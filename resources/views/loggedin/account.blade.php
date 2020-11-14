@@ -32,12 +32,19 @@
                 <a href="{{ url('/blog/author/'.Auth::user() -> id) }}">Your Posts</a>
             </div>
             <div data-aos="fade-left" data-aos-delay="1700" data-aos-once="true">
-            <a href="{{ url('/dashboard/users/rank') }}">Writers ranking</a>
+                <a href="{{ url('/dashboard/users/rank') }}">Writers ranking</a>
             </div>
-            @endif
             <div class="danger" data-aos="fade-left" data-aos-delay="2100" data-aos-once="true">
-            <a href="{{ url('/dashboard/account/delete') }}">Delete account</a>
+                <a href="{{ url('/dashboard/account/delete') }}">Delete account</a>
             </div>
+            @else
+            <div data-aos="fade-left" data-aos-delay="1400" data-aos-once="true">
+                <a href="{{ url('/dashboard/users/rank') }}">Writers ranking</a>
+            </div>
+            <div class="danger" data-aos="fade-left" data-aos-delay="1700" data-aos-once="true">
+                <a href="{{ url('/dashboard/account/delete') }}">Delete account</a>
+                </div>
+            @endif
             @if (Auth::user() -> role == 'Admin')
             <div data-aos="fade-left" data-aos-delay="2400" data-aos-once="true">
                 <a href="{{ url('/dashboard/posts/') }}">All Posts</a>

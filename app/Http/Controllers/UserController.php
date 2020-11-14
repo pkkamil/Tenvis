@@ -45,12 +45,16 @@ class UserController extends Controller
             'email' => ['required', 'string', 'email', 'max:50'],
             'age' => ['nullable','numeric', 'max:120'],
             'telephone' => ['nullable', 'numeric'],
+            'role' => ['in:Admin,Writer,Reader']
         ]);
         $user = User::find(Auth::id());
         $user -> name = $req -> name;
         $user -> email = $req -> email;
         $user -> age = $req -> age;
         $user -> telephone = $req -> telephone;
+        if (Auth::user() -> role == 'Admin') {
+            $user -> role = $req -> role;
+        }
         if($req -> avatar != null) {
             $img_name = Str::random(30);
             $extension = $req -> avatar -> extension();
@@ -75,8 +79,12 @@ class UserController extends Controller
             'email' => ['required', 'string', 'email', 'max:50'],
             'age' => ['nullable','numeric', 'max:120'],
             'telephone' => ['nullable', 'numeric'],
+            'role' => ['in:Admin,Writer,Reader']
         ]);
         $user = User::find($req -> profileId);
+        if (Auth::user() -> role == 'Admin') {
+            $user -> role = $req -> role;
+        }
         $user -> name = $req -> name;
         $user -> email = $req -> email;
         $user -> age = $req -> age;

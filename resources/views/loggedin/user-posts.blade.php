@@ -41,8 +41,8 @@
                         </section>
                     </a>
                 </section>
-            @elseif (Auth::user() -> role == 'writer')
-                @if (Auth::user()-> id == $post -> user_id)
+            @elseif (Auth::user() -> role == 'Writer')
+                @if (Auth::id() == $post -> user_id)
                     <section class="single-blog-outer {{$post -> tag -> name}}">
                         <a class="view-single-blog" href="/blog/post/{{$post -> id}}">
                             <div class="img-box">

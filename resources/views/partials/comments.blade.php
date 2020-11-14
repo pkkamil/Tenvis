@@ -8,9 +8,12 @@
     @endif
     @foreach ($post -> comments as $comment)
         <span class="single-comment">
-        <img src="{{ $comment -> user -> avatar }}" class="avatar" />
-            <span class="name">{{ $comment -> user -> name }}</span>
+        <a href="{{ url('/profile/'.$comment -> user_id) }}"><img src="{{ $comment -> user -> avatar }}" class="avatar" />
+            <span class="name">{{ $comment -> user -> name }}</span></a>
             <span class="wrote">wrote:</span>
+            @if (Auth::id() == $comment -> user_id or Auth::id() == $post -> user_id or Auth::user() -> role == 'Admin')
+            <a href="{{ url('/comments/'.$comment -> id.'/delete') }}"><i class="fas fa-times"></i></a>
+            @endif
             <span class="comment-content">
                 {{$comment -> content}}
                 <span
