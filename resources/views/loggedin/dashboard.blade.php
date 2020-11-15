@@ -7,7 +7,7 @@
 
 @extends('layouts.master')
 @section('content')
-<article class="activity-center dashboard-part  @if (count($posts) > 0)founded @endif">
+<article class="activity-center dashboard-part @if (count($posts) > 0)founded @endif">
     <section class="user-section">
         <img data-aos='fade-right' src="{{ Auth::user() -> avatar }}" alt="">
         <div class="bell" data-aos="fade=right" data-aos-delay="800">
@@ -81,7 +81,7 @@
                     </div>
                     <div data-aos="fade-up" data-aos-delay="800">
                         @if (Auth::user() -> request_writer)
-                        <a class="disabled" href="{{ route('writer-request') }}">Sended request</a>
+                        <a class="disabled" href="{{ route('writer-request') }}">Request sent</a>
                         @else
                         <a href="{{ route('writer-request') }}">Send request</a>
                         @endif

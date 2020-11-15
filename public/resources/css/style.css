@@ -1377,6 +1377,11 @@ article.notifications.sm section.right-part a {
     text-align: center;
 }
 
+article.notifications section h4.empty-mail {
+    font-size: 1em;
+    color: #999;
+}
+
 article.editor h2 {
     color: #FFF;
     font-size: 1.5em;
@@ -2267,7 +2272,7 @@ footer .description {
     article.activity-center .single-blog-outer {
         width: 100%;
     }
-    article.activity-center.founded {
+    article.activity-center {
         padding: 100px 30px;
     }
     article.activity-center.founded .new-posts {
@@ -2567,7 +2572,7 @@ footer .description {
     }
     article.activity-center {
         font-size: 14px;
-        padding: 50px 20px;
+        padding: 150px 10px 50px 10px;
     }
     article.activity-center section.user-section {
         padding: 0 20px;
@@ -2577,9 +2582,6 @@ footer .description {
     }
     article.activity-center .posts-list {
         padding: 0;
-    }
-    article.activity-center.founded {
-        padding: 100px 10px;
     }
     article.editor span.tag-span label,
     article.editor span.tag-span input,
@@ -2632,9 +2634,6 @@ footer .description {
 }
 
 @media (max-width: 450px) and (max-height: 850px) {
-    article.activity-center {
-        padding: 40px 20px;
-    }
     article.editor {
         padding: 150px 40px 20px 40px;
     }

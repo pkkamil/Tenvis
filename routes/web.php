@@ -1,5 +1,6 @@
 <?php
 
+// use App\Events\Notify;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\User;
@@ -121,5 +122,13 @@ Route::middleware(['auth', 'verified'])->group(function() {
 });
 
 Auth::routes(['verify' => true]);
-Route::get('/toast', 'UserController@message');
+// Route::get('/toast', 'UserController@message');
 
+// Route::get('test', function () {
+//     if (Auth::user()) {
+//         event(new Notify(12, 'New message', 'Witam cie!'));
+//         return "Event has been sent!";
+//     } else {
+//         return back();
+//     }
+// });

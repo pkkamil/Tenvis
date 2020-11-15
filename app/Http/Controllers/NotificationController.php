@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Events\Notify;
 use App\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,7 @@ class NotificationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $notifications = Notification::where('user_id', Auth::id()) -> paginate(5);
+        $notifications = Notification::where('user_id', Auth::id())->orderBy('created_at', 'desc') -> paginate(5);
         return view('loggedin.notifications', compact('notifications'));
     }
 
@@ -62,8 +63,8 @@ class NotificationController extends Controller
             'message' => 'View your inbox',
             'type' => 'message',
         );
-
-        return redirect('/profile/'.$req -> profileId)->with('notification', $notification);
+        event(new Notify((int) $req -> profileId, $notifi -> title, $req -> message));
+        return redirect('/profile/'.$req -> profileId);
     }
 
     /**
@@ -109,5 +110,30 @@ class NotificationController extends Controller
     public function destroy($id) {
         Notification::destroy($id);
         return redirect('/dashboard/notifications');
+    }
+
+    public function notify() {
+        if (Auth::user()) {
+            $notifications = Notification::where('user_id', Auth::id())->get();
+            $nts = [];
+            foreach($notifications as $notifi) {
+                if ($notifi -> informed == 0) {
+                    array_push($nts, $notifi);
+                }
+            }
+            if (count($nts) > 1) {
+                $notification = (object)array(
+                    'title' => 'You have some new messages',
+                    'message' => 'View your inbox',
+                    'type' => 'message',
+                );
+            } else if (count($nts) == 1) {
+                $notification = (object)array(
+                    'title' => $notifications -> title,
+                    'message' => 'View your inbox',
+                    'type' => 'message',
+                );
+            } 
+        }
     }
 }

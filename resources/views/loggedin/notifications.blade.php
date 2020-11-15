@@ -10,6 +10,7 @@
 <article class="notifications dashboard-part">
     <section>
         <h2 class="title">Notifications</h2>
+        @if (count($notifications) > 0)
         @foreach ($notifications as $singleMessage)
                 <a href="{{ url('/dashboard/notifications/'.$singleMessage -> id) }}" class="single-message @if($singleMessage -> unread)unread @endif">
                     <img class="avatar-img" src="{{ App\User::find($singleMessage -> sender) -> avatar }}" alt="">
@@ -27,6 +28,9 @@
                     </span>
                 </a>
         @endforeach
+        @else
+            <h4 class="empty-mail">You don't have any messages.</h3>
+        @endif
         <span class="pagination">
             {{ $notifications->links('vendor.pagination.custom') }}
         </span>
