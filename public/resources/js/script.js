@@ -21,10 +21,10 @@ $(window).on("scroll", function() {
 })
 
 $(".smooth-scroller").click(function() {
-    if (window.innerWidth > 320) {
+    if (window.innerWidth > 976) {
         $([document.documentElement, document.body]).animate({
                 scrollTop: $($(this).data("scroll")).offset().top -
-                    $("nav").height() * 2,
+                    $("nav").height() * 1.99,
             },
             2000
         )
@@ -40,6 +40,7 @@ $(".smooth-scroller").click(function() {
 
 $('a[href="/#"]').click(function() {
     // if ($(this).hasClass('active')) {
+    $("nav ul").removeClass("showing")
     $([document.documentElement, document.body]).animate({
                 scrollTop: 0,
             },
